@@ -1,88 +1,99 @@
 ---
 name: build-visual-cms
-description: Analyze an existing website and design or implement a project-specific, preview-first visual CMS with a compact left editing pane, dominant full-height desktop live preview using the real public components, field-focus bidirectional selection, independently scrolling panes, structure-faithful list and grid editing, operator-managed images, always-available favicon editing, site-wide style tokens, sortable repeatable content, and one bottom Apply action. Use when asked to add a CMS, admin editor, visual content management, live website preview, editable site content, image management, visual selection, or a non-developer editing workflow to an existing web project. Do not assume any industry, page type, or content model.
+description: Analyze an existing website and design or implement a scope-bounded, preview-first visual CMS with a compact left editing pane, dominant full-height desktop live preview using the real public components, field-focus bidirectional selection, independently scrolling panes, structure-faithful editing, operator-managed images, always-available favicon editing, site-wide style tokens, sortable content, and one bottom Apply action. Use when asked to add a CMS, admin editor, visual content management, live website preview, editable site content, image management, visual selection, or a non-developer editing workflow to an existing web project. Do not assume any industry, page type, or content model.
 ---
 
 # Build Visual CMS
 
-Build a CMS that adapts to the website instead of imposing a generic demo schema. Preserve the public design and make routine content changes safe for non-developers.
+Build the smallest CMS that satisfies the requested scope while preserving the public design and making routine changes safe for non-developers.
 
-## Core rules
+## Choose the execution scope
 
-- Inspect the project before designing the CMS. Infer its framework, routes, component boundaries, content sources, design tokens, authentication, storage, and deployment path.
-- Treat existing domain concepts only as project-local data. Never introduce speakers, products, posts, events, teams, or other entities unless the target site contains them.
-- Reuse the real public components in the preview. Do not maintain a second approximation of the website.
-- Prioritize operator ease, visual simplicity, and preview visibility. Make the left pane entirely the compact editor and the right pane entirely the dominant live preview. Give the editor a light neutral or clearly contrasting surface instead of visually blending it into the public preview, while preserving accessible contrast. Let the preview use the remaining workspace, fill the available shell height, and keep all content reachable without clipping.
-- Give the editor and preview their own bounded scroll containers without exception. Keep selection synchronized, but a selection initiated in one pane may reveal, navigate, or scroll only the opposite pane; it must not move the initiating pane, the outer page, or bind both panes to one scroll position.
-- Treat focus or click on every mapped editor control as selection of its preview target. Navigate, reveal, scroll, and highlight the preview once on target change; do not repeat scrolling on each keystroke or disrupt input focus.
-- Map editable targets down to the smallest meaningful field-level element, including text, media, labels, buttons, links, and nested collection values. Prefer the deepest editable target under a pointer and fall back to its item, component, or section only when no finer mapping exists.
-- Make the editor reflect the public layout's meaningful spatial structure and layout type at the desktop preview width. Preserve direction, grouping, hierarchy, ordering, grid areas, featured items, and row or column spans; never flatten an asymmetric composition into equal cards or turn a public list into an editor grid merely for convenience.
-- Separate content data from presentation without rewriting unrelated architecture.
-- Match controls to content semantics: short text, multiline text, rich text, image, link, number, boolean, select, list, object, and collection.
-- Discover and classify all image assets that operators may reasonably need to change. Make them editable by default, including content, background, responsive, branding, app-icon, and social-sharing images; document every intentional exclusion and its reason. Always provide a favicon field in global settings even when the site has no current favicon.
-- Always provide a recognizable global settings area containing at minimum the site's primary color, typography or font-family control, and favicon. Bind color and typography controls to shared site-wide tokens so every intended public component updates consistently; use safe existing choices or presets instead of arbitrary CSS.
-- Keep top-level editor navigation minimal: `Global settings` and `Page`, plus a page selector while `Page` is active. Group global settings into Brand, Style, Header, and Footer as applicable. Put the site logo and shared header navigation labels, links, and order there; keep tabs or navigation used by only one page inside that page.
-- Give ordered collections deliberate drag-and-drop with a dedicated handle, clear drag preview and insertion target, editor-local auto-scroll, cancellation, completion feedback, and keyboard operation through the handle. Do not add separate up/down arrow buttons. Keep selection and focus stable by item ID.
-- Use one primary `Apply` action fixed or sticky at the bottom of the left editor pane. Do not add top-bar save/publish actions, draft-saving controls, or undo/redo buttons. Preview working changes immediately, but persist them only when the operator applies them.
-- Preserve unrelated user changes and existing visual conventions.
-- Do not deploy or migrate production data unless the user authorizes it.
+Choose once before inspecting broadly. Do not invent an effort tier or silently expand scope.
+
+- **Scoped (default):** When the user names a page, section, feature, or change, inspect, implement, and validate only that scope and its direct shared dependencies.
+- **Representative:** When the user broadly asks for a CMS and the architecture is unproven, implement one representative page or content group plus required global settings first.
+- **Full-site:** Use only when the user explicitly requests the entire site or all pages. Prove the pattern on one representative surface before extending it.
+
+Do not promote scoped or representative work to full-site on your own. If no material choice requires approval, continue through the chosen scope without pausing merely to report an intermediate milestone.
+
+## Quality invariants
+
+Apply these to every implemented scope:
+
+- Inspect the relevant project code before designing the CMS. Reuse its framework, routes, components, content sources, design tokens, authentication, storage, and visual conventions.
+- Never invent domain entities that the target site does not contain.
+- Render the real public components in preview; do not maintain preview-only approximations.
+- Make the left pane entirely the compact editor and the right pane entirely the dominant live preview. Use a light neutral or clearly contrasting accessible editor surface.
+- Give editor and preview separate bounded scroll roots without exception. Synchronize selection, but scroll only the opposite pane; never move the initiating pane or outer page.
+- Preserve the meaningful public structure for every edited surface: layout type, direction, order, grouping, hierarchy, columns, featured items, grid areas, and spans.
+- Match controls to content semantics and preserve existing data compatibility.
+- Always provide global settings for primary color, typography or font family, and favicon. Bind style controls to safe shared tokens and always allow adding the first favicon.
+- Keep top-level editor navigation to `Global settings` and `Page`; show the page selector only in page mode. Group applicable global controls under Brand, Style, Header, and Footer.
+- Use one primary `Apply` action fixed or sticky at the bottom of the editor. Do not add top save/publish, draft-save, undo, or redo actions.
+- Preserve unrelated user changes. Do not deploy or migrate production data without authorization.
+
+## Conditional capabilities
+
+Apply a capability only when it exists in the chosen scope; once included, follow its full quality rule rather than treating it as optional polish.
+
+- **Editable fields:** Map each included control to the smallest meaningful preview target. Focus or click reveals and highlights the opposite target once without keystroke scroll loops.
+- **Lists and grids:** Match the public collection primitive and spatial relationships. Never turn a public vertical list into an editor grid or flatten asymmetric layouts.
+- **Ordered collections:** Provide deliberate drag-and-drop with a handle, destination feedback, editor-local auto-scroll, cancellation, stable IDs, and keyboard operation through the handle. Do not add standalone up/down buttons.
+- **Images:** Inventory operator-relevant images inside the chosen scope and make safe assets editable. For full-site work, inventory all operator-relevant content, background, responsive, branding, app-icon, and social-sharing assets and report exclusions.
+- **Shared content:** Treat shared-layout content or content reused across two or more pages as global. Keep page-only tabs, navigation, and calls to action inside their page.
+- **Persistence or authentication:** Reuse the existing backend and authorization. Protect every write server-side and keep content operations behind the smallest practical load/apply boundary.
+
+## Load references conditionally
+
+Do not read every reference by default. Read only the files and sections needed for the chosen scope:
+
+- Read [references/content-discovery.md](references/content-discovery.md) for representative or full-site discovery, a new content model, or asset inventory. Skip it for a narrow change whose sources are already clear.
+- Read [references/cms-architecture.md](references/cms-architecture.md) when persistence, authentication, media storage, working state, or Apply behavior is in scope.
+- Read [references/editor-ux.md](references/editor-ux.md) when building or changing editor layout, selection, scrolling, structure mapping, media controls, global controls, or reordering.
+- Read only the applicable sections of [references/validation-checklist.md](references/validation-checklist.md) after implementation. Do not execute unrelated checklist items.
 
 ## Workflow
 
-### 1. Discover the project
+### 1. Inspect the bounded surface
 
-Read [references/content-discovery.md](references/content-discovery.md) completely. Inspect the repository and identify editable content candidates, repeated structures, shared settings, current persistence, and operational constraints.
+Trace the requested surface and its direct consumers end to end. For representative or full-site work, identify shared layouts, global settings, content sources, repeated structures, and operational constraints. Ask only about choices that cannot be inferred safely and materially change the implementation.
 
-Ask only about choices that cannot be inferred safely and materially change the implementation, such as administrator access, apply behavior in the existing backend, or a new storage provider.
+### 2. Model only discovered content
 
-### 2. Propose the content model
+Group values into global settings, page or section content, repeatable collections, and non-editable operational settings. Prefer explicit types, stable item IDs, backward-compatible defaults, and a clear distinction between missing and intentionally empty values.
 
-Group discovered values into:
+### 3. Design the editor contract
 
-- global settings shared across the site;
-- page or section content;
-- repeatable collections;
-- operational settings that should not be exposed as content.
+Keep the left editor compact, clean, and structure-aware beside the dominant preview. Make the common path obvious: choose global or page scope, select a section or item, edit while reviewing preview, then select `Apply`.
 
-Treat content rendered by a shared layout or reused across two or more pages as global by default. Keep page-specific tabs, navigation, and calls to action with their page even when they look similar to global controls.
+Treat editor and preview as coordinated views of one content tree. Use stable target IDs and source-aware selection so route changes, tabs, highlights, and opposite-pane scrolling cannot loop or steal focus.
 
-Prefer explicit typed schemas. Preserve stable IDs for collection items. Distinguish empty values from missing values and plan backward-compatible defaults for existing saved data.
+### 4. Prove before expanding
 
-Read [references/cms-architecture.md](references/cms-architecture.md) completely before selecting state, persistence, authentication, media, or apply architecture.
+For representative or full-site work, implement one representative page or content group first, including real preview rendering, field selection, independent scrolling, global tokens, and Apply behavior. Pass the bounded validation budget before copying the pattern to more pages. Do not build every page first and validate afterward.
 
-### 3. Design the editor experience
+Extend only the proven pattern and only through the chosen scope. Prefer the minimum code that satisfies the invariants; do not build a universal form engine or create auxiliary implementation documents.
 
-Read [references/editor-ux.md](references/editor-ux.md) completely. Default to a compact editing panel beside a dominant live preview, and adapt their proportions to the target desktop workspace without arbitrary fixed widths.
+### 5. Apply safely
 
-Make the common path obvious: choose a page, choose a section or item, edit while reviewing the live preview, and select `Apply` at the bottom of the editor. Avoid exposing raw implementation details or unconstrained CSS when safe presets are sufficient.
+Preview working changes immediately but persist only through the single `Apply` action. Distinguish unchanged, changed, applying, applied, and failed states without adding more actions. Warn before losing unapplied work and retain failed changes for retry.
 
-Treat the editor and preview as two coordinated views of the same content tree, not one coupled scrolling surface. Require stable addressable IDs for editable pages, sections, components, collection items, and fields where needed for reliable selection, source-aware scrolling, route changes, tab activation, and highlighting.
+### 6. Validate within budget
 
-### 4. Implement incrementally
+By default:
 
-Use the project's existing framework, styling system, validation library, and data layer when suitable. Start with one representative page or content group to prove the architecture, then extend the established pattern.
+1. Run the smallest repository-provided format, lint, type, test, or build checks that cover the changed files; run the full production build only when required by the project or no narrower check provides confidence.
+2. Verify one representative edit-to-preview selection flow, independent scrolling in both directions, one relevant global token change, and one Apply-and-reload round trip.
+3. Run additional checklist items only for capabilities changed in this task.
 
-Ensure editor state drives the same components used publicly. Add reusable field and collection primitives only when they reduce duplication in the actual project. Do not build a universal form engine speculatively. Implement bidirectional editor-preview selection for the representative page before extending the pattern.
+Do full-page matrices, every-page screenshots, exhaustive asset checks, maximum-data cases, or all-view console sweeps only when the user requests full verification, the chosen scope is full-site and the risk warrants it, or a failure suggests broader impact. Never escalate to exhaustive verification merely because time is available.
 
-For lists and grids, first match the public collection's layout type and order, then support add, edit, delete, polished pointer and keyboard reordering, empty state, and meaningful item summaries. Add media preview, replacement, removal, upload progress, and errors when media is editable.
-
-Treat site-wide identity assets and styles as explicit global settings. Always include primary color, typography or font-family, and favicon controls. Reuse existing design tokens and font loading; when a shared token is missing, add the smallest site-wide token that all intended consumers can use. Preserve an existing framework metadata pipeline or add the smallest framework-native favicon integration when none exists. Preserve icon manifests, responsive-image, optimization, and storage conventions rather than replacing them with generic URL fields.
-
-### 5. Connect persistence and apply
-
-Keep content operations behind a small repository boundary when practical: load and apply. Use the existing backend when one exists, mapping the single operator action to the smallest safe durable write. Do not add draft infrastructure, version history, or extra action layers merely for architectural purity.
-
-Keep the single bottom action visible while editing and distinguish unchanged, changed, applying, applied, and failed states without adding more action buttons. Warn before losing unapplied changes. Treat destructive deletion and schema migration with appropriate confirmation.
-
-### 6. Validate
-
-Read [references/validation-checklist.md](references/validation-checklist.md) completely and perform checks proportional to the change. At minimum, run the project's lint/type/build checks and verify representative editing flows and desktop preview behavior.
-
-Report what was implemented, apply behavior, validation performed, and any remaining operational setup. Clearly distinguish local implementation from production deployment.
+Report the implemented scope, Apply behavior, checks performed, intentionally unimplemented areas, and whether work is local, staged, or deployed.
 
 ## Scope control
 
 - If the user asks only for a proposal or audit, do not modify files.
-- If the site has no authentication or persistence decision, implement only the safe local/editor architecture unless the user chooses the missing system.
-- If adding CMS capability would require a major framework rewrite, present the smallest viable integration and its tradeoffs before expanding scope.
-- Examples from prior projects are patterns, never default content models.
+- If authentication or persistence is undecided, implement only the safe local/editor boundary unless the user chooses the missing system.
+- If CMS capability requires a major framework rewrite, present the smallest viable integration and its tradeoffs before expanding.
+- Prior-project examples are patterns, never default content models.

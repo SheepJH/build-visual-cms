@@ -1,5 +1,17 @@
 # Validation checklist
 
+Use only the sections and checks relevant to the chosen execution scope and changed capabilities. This file is a menu, not a requirement to execute every item.
+
+## Default budget
+
+- Run the narrowest repository-provided checks that cover the changed files.
+- Verify one representative field selection in both directions without coupled scrolling or lost focus.
+- Scroll editor and preview independently.
+- Change one relevant global token and confirm its intended consumers update.
+- Select `Apply`, reload, and confirm the change persists.
+
+Use the remaining checks only when their feature changed, a failure suggests broader impact, or the user explicitly requests fuller verification. Reserve every-page screenshots, full view matrices, exhaustive asset inventories, maximum-data cases, and broad console sweeps for justified full-site verification.
+
 ## Architecture
 
 - Public pages and editor preview use the same rendering components.
