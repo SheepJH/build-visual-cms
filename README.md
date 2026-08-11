@@ -1,4 +1,4 @@
-# Build Visual CMS
+# 🧩 Build Visual CMS
 
 기존 웹사이트를 분석해 **실제 화면과 연결된 맞춤형 CMS**를 설계하고 구현하도록 돕는 Agent Skill입니다.
 
@@ -10,7 +10,7 @@
 - 반복 콘텐츠 정렬, 실행 취소, 초안·게시 상태 지원
 - **Codex와 Claude Code에서 공통 사용 가능**
 
-## 설치
+## 🚀 설치
 
 ### 한 번에 설치
 
@@ -48,7 +48,7 @@ cp -R /tmp/build-visual-cms/skills/build-visual-cms ~/.claude/skills/build-visua
 
 </details>
 
-## 사용
+## 🛠️ 사용
 
 작업할 웹 프로젝트를 연 뒤 이렇게 요청하세요.
 
@@ -63,7 +63,7 @@ $build-visual-cms를 사용해서 이 프로젝트를 분석하고,
 $build-visual-cms를 사용해서 CMS 도입안을 먼저 작성해줘. 파일은 수정하지 마.
 ```
 
-## 주요 규칙
+## 📌 주요 규칙
 
 <details>
 <summary><strong>미리보기와 선택 동기화</strong></summary>
@@ -116,7 +116,7 @@ $build-visual-cms를 사용해서 CMS 도입안을 먼저 작성해줘. 파일�
 
 </details>
 
-## 구조
+## 📂 구조
 
 ```text
 skills/build-visual-cms/
@@ -131,7 +131,7 @@ skills/build-visual-cms/
 
 `SKILL.md`와 `references/`는 Codex와 Claude가 함께 사용하며, `agents/openai.yaml`은 Codex용 표시 정보입니다.
 
-## 커밋 규칙
+## 📝 커밋 규칙
 
 Conventional Commits 형식과 한국어 설명을 사용합니다.
 
