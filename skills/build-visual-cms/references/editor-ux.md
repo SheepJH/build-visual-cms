@@ -8,13 +8,25 @@ Fill the available application height below persistent chrome. Give the editor a
 
 Do not put both panes inside one shared vertical scrolling surface, mirror their scroll offsets, or let programmatic scrolling in one pane move the other pane. Never hide overflowing preview content without an accessible scroll path.
 
-Organize navigation from broad to specific:
+Keep top-level navigation to two clear choices and show the page selector only in page mode:
 
 ```text
-global settings -> page -> section -> collection item -> field
+[Global settings] [Page]
+                  Page: [selected page]
 ```
 
-Do not show the entire site schema as one long form. Preserve context by displaying the current page, section, and selected item.
+Within `Global settings`, group applicable controls in this order:
+
+```text
+Brand -> logo, favicon, identity assets
+Style -> primary color, typography or font family
+Header -> shared navigation labels, links, order, shared call to action
+Footer -> shared contact details, links, social links
+```
+
+Within `Page`, continue from page to section, collection item, and field. Do not show the entire site schema as one long form. Preserve context by displaying the current page, section, and selected item.
+
+Put shared-layout content or content reused across two or more pages in `Global settings` by default. Keep page-only tabs, subnavigation, and calls to action inside their page. Do not duplicate the same shared header or footer controls under every page.
 
 Keep the interface visually clean, direct, and sparse. Do not place editing tools or persistence actions above the preview. Put one primary `Apply` button in a fixed or sticky footer at the bottom of the left editor pane. Do not show draft-save, publish, undo, or redo buttons.
 
@@ -129,7 +141,7 @@ Disable `Apply` when nothing changed, prevent duplicate submission while applyin
 
 ## Global styles
 
-Always show a recognizable global settings group with primary color, typography or font-family, and favicon controls. Additional safe options may include logo, default social image, density, button style, or card radius when the site supports them.
+Always show a recognizable global settings area with Brand, Style, Header, and Footer groups when applicable. Brand includes the shared logo and favicon; Style includes primary color and typography or font family; Header includes shared navigation; Footer includes shared footer content. Additional safe options may include default social image, density, button style, or card radius when the site supports them.
 
 Bind primary color and typography controls to the site's existing shared tokens so every intended color and text consumer changes consistently across the entire site. Offer the site's loaded font families or a small validated preset list; do not accept arbitrary font URLs, arbitrary CSS, or choices the public rendering path cannot load. Show every global effect immediately throughout the preview when the browser surface permits it.
 

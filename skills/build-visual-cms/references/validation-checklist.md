@@ -32,6 +32,9 @@
 - Test content, background, responsive, logo, favicon or app-icon, and social-sharing image flows when those asset classes exist.
 - Confirm global settings always show favicon controls. Test both replacing an existing favicon and adding the first favicon when no asset or metadata entry exists.
 - Confirm global settings always show primary-color and typography or font-family controls, even when discovery must introduce the smallest shared token.
+- Confirm the left editor exposes only `Global settings` and `Page` as top-level choices, with the page selector visible in page mode.
+- Confirm shared logos, header navigation labels, links, order, shared calls to action, and footer content appear once under the appropriate global group instead of being duplicated per page.
+- Confirm page-only tabs and subnavigation remain in their page editor rather than being incorrectly promoted to global settings.
 - Verify required dimensions, aspect ratios, variants, alternative text, safe removal, and restore-default behavior as applicable.
 - Confirm there are no draft-save, publish, undo, or redo buttons.
 - Verify the left editor has one bottom `Apply` action with unchanged, changed, applying, applied, and failed feedback.

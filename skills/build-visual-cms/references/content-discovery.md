@@ -24,12 +24,14 @@ Respect repository instructions and dirty worktrees. Prefer fast file search and
 
 Classify each candidate as one of:
 
-1. Global content: branding, navigation labels, contact details, social links, footer.
+1. Global content: branding and logo, shared header navigation labels and links, shared calls to action, contact details, social links, and footer.
 2. Global style: always include primary color and typography or font-family controls, then add other controlled tokens such as spacing density or card style only when the site uses them.
 3. Page content: headings, descriptions, calls to action, metadata.
 4. Section content: locally grouped fields.
 5. Collection: ordered repeatable objects displayed as a list, grid, carousel, timeline, table, or tabs.
 6. Operational configuration: secrets, permissions, integration IDs, database configuration. Do not expose these as ordinary CMS fields.
+
+Classify content from a shared layout or content reused across two or more pages as global by default. A tab set, submenu, or navigation control used only inside one page remains page content even if it visually resembles the shared header navigation.
 
 ## Image asset inventory
 
@@ -45,6 +47,8 @@ Make operator-managed assets editable by default. Do not expose system assets or
 Create a global favicon candidate even when discovery finds no favicon file, metadata entry, or manifest reference. Absence is an editable empty state, not a reason to omit the field.
 
 Create global primary-color and typography candidates even when the site lacks clean shared tokens. Trace every intended consumer and prefer the existing theme and font-loading path; propose the smallest shared token only when necessary for consistent site-wide editing.
+
+Create a global logo candidate when the site has a shared logo. Inventory shared header navigation labels, destinations, order, active-state behavior, and shared calls to action so operators can edit them together without mixing them into page content.
 
 Trace variants that represent one logical image, including desktop/mobile crops, `srcset` sources, light/dark logos, favicon sizes, and manifest icon sets. Model them together when operators must understand or replace them as a group.
 

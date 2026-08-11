@@ -21,6 +21,7 @@ Build a CMS that adapts to the website instead of imposing a generic demo schema
 - Match controls to content semantics: short text, multiline text, rich text, image, link, number, boolean, select, list, object, and collection.
 - Discover and classify all image assets that operators may reasonably need to change. Make them editable by default, including content, background, responsive, branding, app-icon, and social-sharing images; document every intentional exclusion and its reason. Always provide a favicon field in global settings even when the site has no current favicon.
 - Always provide a recognizable global settings area containing at minimum the site's primary color, typography or font-family control, and favicon. Bind color and typography controls to shared site-wide tokens so every intended public component updates consistently; use safe existing choices or presets instead of arbitrary CSS.
+- Keep top-level editor navigation minimal: `Global settings` and `Page`, plus a page selector while `Page` is active. Group global settings into Brand, Style, Header, and Footer as applicable. Put the site logo and shared header navigation labels, links, and order there; keep tabs or navigation used by only one page inside that page.
 - Give ordered collections deliberate drag-and-drop with a dedicated handle, clear drag preview and insertion target, pane-local auto-scroll, cancellation, completion feedback, and accessible move controls. Keep selection and focus stable by item ID.
 - Use one primary `Apply` action fixed or sticky at the bottom of the left editor pane. Do not add top-bar save/publish actions, draft-saving controls, or undo/redo buttons. Preview working changes immediately, but persist them only when the operator applies them.
 - Preserve unrelated user changes and existing visual conventions.
@@ -42,6 +43,8 @@ Group discovered values into:
 - page or section content;
 - repeatable collections;
 - operational settings that should not be exposed as content.
+
+Treat content rendered by a shared layout or reused across two or more pages as global by default. Keep page-specific tabs, navigation, and calls to action with their page even when they look similar to global controls.
 
 Prefer explicit typed schemas. Preserve stable IDs for collection items. Distinguish empty values from missing values and plan backward-compatible defaults for existing saved data.
 
