@@ -31,6 +31,7 @@
 - Verify every operator-managed image in the discovery inventory is editable, or appears in the exclusion report with a valid reason.
 - Test content, background, responsive, logo, favicon or app-icon, and social-sharing image flows when those asset classes exist.
 - Confirm global settings always show favicon controls. Test both replacing an existing favicon and adding the first favicon when no asset or metadata entry exists.
+- Confirm global settings always show primary-color and typography or font-family controls, even when discovery must introduce the smallest shared token.
 - Verify required dimensions, aspect ratios, variants, alternative text, safe removal, and restore-default behavior as applicable.
 - Confirm there are no draft-save, publish, undo, or redo buttons.
 - Verify the left editor has one bottom `Apply` action with unchanged, changed, applying, applied, and failed feedback.
@@ -54,6 +55,7 @@
 - Verify long titles, long words, missing images, empty collections, and maximum realistic item counts.
 - Ensure preview links and forms cannot accidentally trigger unintended production behavior.
 - Change the primary color and confirm every intended site-wide consumer updates consistently in preview while unrelated colors remain unchanged.
+- Change the typography or font-family preset and confirm every intended site-wide text consumer updates consistently, the chosen font actually loads, and unrelated icon or code fonts remain unchanged.
 - Confirm the whole editor remains visually clean, direct, and concise at the representative desktop size.
 
 ## Engineering checks

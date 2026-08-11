@@ -20,6 +20,7 @@ Build a CMS that adapts to the website instead of imposing a generic demo schema
 - Separate content data from presentation without rewriting unrelated architecture.
 - Match controls to content semantics: short text, multiline text, rich text, image, link, number, boolean, select, list, object, and collection.
 - Discover and classify all image assets that operators may reasonably need to change. Make them editable by default, including content, background, responsive, branding, app-icon, and social-sharing images; document every intentional exclusion and its reason. Always provide a favicon field in global settings even when the site has no current favicon.
+- Always provide a recognizable global settings area containing at minimum the site's primary color, typography or font-family control, and favicon. Bind color and typography controls to shared site-wide tokens so every intended public component updates consistently; use safe existing choices or presets instead of arbitrary CSS.
 - Give ordered collections deliberate drag-and-drop with a dedicated handle, clear drag preview and insertion target, pane-local auto-scroll, cancellation, completion feedback, and accessible move controls. Keep selection and focus stable by item ID.
 - Use one primary `Apply` action fixed or sticky at the bottom of the left editor pane. Do not add top-bar save/publish actions, draft-saving controls, or undo/redo buttons. Preview working changes immediately, but persist them only when the operator applies them.
 - Preserve unrelated user changes and existing visual conventions.
@@ -62,7 +63,7 @@ Ensure editor state drives the same components used publicly. Add reusable field
 
 For lists and grids, first match the public collection's layout type and order, then support add, edit, delete, polished pointer and keyboard reordering, empty state, and meaningful item summaries. Add media preview, replacement, removal, upload progress, and errors when media is editable.
 
-Treat site-wide identity assets as explicit global settings. Always include favicon upload or replacement with a clear empty state; preserve an existing framework metadata pipeline or add the smallest framework-native favicon integration when none exists. Preserve icon manifests, responsive-image, optimization, and storage conventions rather than replacing them with generic URL fields.
+Treat site-wide identity assets and styles as explicit global settings. Always include primary color, typography or font-family, and favicon controls. Reuse existing design tokens and font loading; when a shared token is missing, add the smallest site-wide token that all intended consumers can use. Preserve an existing framework metadata pipeline or add the smallest framework-native favicon integration when none exists. Preserve icon manifests, responsive-image, optimization, and storage conventions rather than replacing them with generic URL fields.
 
 ### 5. Connect persistence and apply
 

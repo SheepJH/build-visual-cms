@@ -25,7 +25,7 @@ Respect repository instructions and dirty worktrees. Prefer fast file search and
 Classify each candidate as one of:
 
 1. Global content: branding, navigation labels, contact details, social links, footer.
-2. Global style: controlled tokens such as brand color, typography preset, spacing density, or card style.
+2. Global style: always include primary color and typography or font-family controls, then add other controlled tokens such as spacing density or card style only when the site uses them.
 3. Page content: headings, descriptions, calls to action, metadata.
 4. Section content: locally grouped fields.
 5. Collection: ordered repeatable objects displayed as a list, grid, carousel, timeline, table, or tabs.
@@ -43,6 +43,8 @@ Inventory operator-relevant images across components, content files, stylesheets
 Make operator-managed assets editable by default. Do not expose system assets or assets whose replacement would break behavior, licensing, security, or layout assumptions. Record excluded assets and a concise reason instead of silently omitting them.
 
 Create a global favicon candidate even when discovery finds no favicon file, metadata entry, or manifest reference. Absence is an editable empty state, not a reason to omit the field.
+
+Create global primary-color and typography candidates even when the site lacks clean shared tokens. Trace every intended consumer and prefer the existing theme and font-loading path; propose the smallest shared token only when necessary for consistent site-wide editing.
 
 Trace variants that represent one logical image, including desktop/mobile crops, `srcset` sources, light/dark logos, favicon sizes, and manifest icon sets. Model them together when operators must understand or replace them as a group.
 

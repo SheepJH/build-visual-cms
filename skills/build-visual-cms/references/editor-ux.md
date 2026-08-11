@@ -129,7 +129,9 @@ Disable `Apply` when nothing changed, prevent duplicate submission while applyin
 
 ## Global styles
 
-Expose only tokens and identity assets that operators can safely manage across the site, such as primary brand color, logo, favicon set, default social image, typography preset, density, button style, or card radius. Bind the primary color control to the site's existing shared token so every intended primary-color consumer changes consistently across the entire site. Do not expose arbitrary CSS by default. Show every global effect immediately throughout the preview when the browser surface permits it.
+Always show a recognizable global settings group with primary color, typography or font-family, and favicon controls. Additional safe options may include logo, default social image, density, button style, or card radius when the site supports them.
+
+Bind primary color and typography controls to the site's existing shared tokens so every intended color and text consumer changes consistently across the entire site. Offer the site's loaded font families or a small validated preset list; do not accept arbitrary font URLs, arbitrary CSS, or choices the public rendering path cannot load. Show every global effect immediately throughout the preview when the browser surface permits it.
 
 ## Destructive and high-impact actions
 
