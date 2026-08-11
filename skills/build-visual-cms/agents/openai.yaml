@@ -1,4 +1,4 @@
 interface:
   display_name: "Visual CMS Builder"
   short_description: "편집하기 쉽고 미리보기 중심인 맞춤형 CMS를 구축합니다"
-  default_prompt: "Use $build-visual-cms to analyze this website and build an operator-friendly, preview-first visual CMS with full-height desktop preview, field-focus synchronization, faithful asymmetric layouts, and always-available favicon editing."
+  default_prompt: "Use $build-visual-cms to build a clean visual CMS with a compact left editor, dominant right preview, structure-faithful controls, site-wide style tokens, and one bottom Apply action."

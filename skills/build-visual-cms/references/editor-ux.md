@@ -2,7 +2,7 @@
 
 ## Layout
 
-Use a stable, preview-first desktop editor shell with clear navigation and a visible side-by-side live preview. Keep the editor only as wide as its actual controls require and let the preview consume the remaining space; avoid arbitrary fixed widths that make the editor dominate on large displays.
+Use a stable, preview-first desktop shell with two unmistakable regions: the left side is entirely the editor and the right side is entirely the live preview. Keep the left editor only as wide as its actual controls require and let the right preview consume the remaining space; avoid arbitrary fixed widths that make the editor dominate on large displays.
 
 Fill the available application height below persistent chrome. Give the editor and preview separate bounded scroll containers with a valid shrinking height chain; ensure nested grid or flex children can shrink and scroll instead of being clipped. If preview uses an iframe, size it to its container and make the document itself reachable through preview scrolling.
 
@@ -15,6 +15,8 @@ global settings -> page -> section -> collection item -> field
 ```
 
 Do not show the entire site schema as one long form. Preserve context by displaying the current page, section, and selected item.
+
+Keep the interface visually clean, direct, and sparse. Do not place editing tools or persistence actions above the preview. Put one primary `Apply` button in a fixed or sticky footer at the bottom of the left editor pane. Do not show draft-save, publish, undo, or redo buttons.
 
 ## Structure-aware editor representation
 
@@ -46,7 +48,7 @@ For example, when the public composition shows item 1 as a full-width or feature
 
 When the compact editor cannot show public components at full size, use compact item representations rather than changing the layout type. Preserve the same columns, spans, grouping, emphasis, and source order, and keep each item's controls clearly associated with its visual position.
 
-Do not reproduce decorative styling at the expense of editing clarity. Preserve informational spatial structure—layout type, direction, order, grouping, hierarchy, relative position, and column behavior—while keeping labels, controls, focus, and validation accessible.
+Do not reproduce decorative styling at the expense of editing clarity, but make the editing arrangement feel nearly identical to the preview's meaningful structure. Preserve layout type, direction, order, grouping, hierarchy, relative position, and column behavior while keeping labels, controls, focus, and validation accessible.
 
 ## Field behavior
 
@@ -85,8 +87,8 @@ Avoid using array indices as persistent keys.
 - Follow the public layout's movement model: vertical lists move vertically, horizontal lists horizontally, and grids by visual cell order. Do not allow cross-group moves unless the content model explicitly supports them.
 - Auto-scroll only the editor's bounded scroll container when the pointer approaches its edge. Increase speed gradually, cap it, and never move the outer page or preview pane as a side effect of dragging.
 - Reflect the provisional order in the preview without persistently saving every pointer movement. Keep a visible preview association for the dragged item without forcing preview scroll when the affected region is already visible.
-- Commit one meaningful history operation on drop. Restore the original order on `Escape`, invalid drop, or cancellation; retain the selected item by stable ID.
-- After drop, move focus back to the item's handle, announce its new position, animate items briefly without excessive motion, and offer immediate undo.
+- Restore the original order on `Escape`, invalid drop, or cancellation; retain the selected item by stable ID.
+- After drop, move focus back to the item's handle, announce its new position, and animate items briefly without excessive motion.
 - Provide keyboard-accessible pick up, move, drop, and cancel behavior or explicit move controls with equivalent outcomes. Announce position and valid destinations to assistive technology.
 
 ## Image and identity assets
@@ -97,13 +99,13 @@ Avoid using array indices as persistent keys.
 - Group responsive sources, crops, light/dark variants, or icon sizes as one understandable asset set instead of unrelated file inputs.
 - Always place a favicon field under recognizable global site or brand settings. Show upload or add controls when none exists and replacement or restoration controls when one does.
 - Place logo, touch icon, manifest icons, and default social image under the same global settings when applicable.
-- Preview content and background image changes in their real public components. For browser-level assets such as favicons, provide a local preview and clearly indicate when a reload, metadata refresh, or publish is required.
+- Preview content and background image changes in their real public components. For browser-level assets such as favicons, provide a local preview and clearly indicate when a reload or metadata refresh is required after applying.
 - Explain why a discovered asset is read-only or excluded when an operator could reasonably expect to edit it.
 
 ## Preview
 
 - Render real public components and styles.
-- Update promptly as draft state changes.
+- Update promptly as working state changes.
 - Render a stable desktop preview at the configured representative width.
 - Use all available shell height and keep the full preview document reachable through its own scroll container. Empty space is acceptable; inaccessible clipped content is not.
 - Give each editable preview target a stable mapping to its editor target; do not depend on array indexes or visible text for identity. Support mappings at page, section, component, collection-item, and field level.
@@ -119,16 +121,16 @@ Avoid using array indices as persistent keys.
 - Provide a non-pointer path from the editor to every target; preview click-to-edit must complement rather than replace accessible editor navigation.
 - Contain preview links and destructive interactions so operators do not accidentally leave the editor or trigger real actions.
 
-## Feedback and recovery
+## Apply and feedback
 
-Make these states distinct: unchanged, unsaved, saving, saved, publishing, published, and failed.
+Preview changes immediately, but keep them in working state until the operator selects `Apply`. Make unchanged, changed, applying, applied, and failed states distinct through the single bottom action and concise adjacent feedback.
 
-Provide undo and redo for content edits. Warn before closing or navigating away with unsaved changes. Surface actionable errors and keep failed changes available for retry.
+Disable `Apply` when nothing changed, prevent duplicate submission while applying, and retain failed changes for retry. Warn before closing or navigating away with unapplied changes. Do not add separate draft-save, publish, undo, or redo buttons.
 
 ## Global styles
 
-Expose only tokens and identity assets that operators can safely manage across the site, such as brand color, logo, favicon set, default social image, typography preset, density, button style, or card radius. Do not expose arbitrary CSS by default. Show the global effect immediately in preview when the browser surface permits it.
+Expose only tokens and identity assets that operators can safely manage across the site, such as primary brand color, logo, favicon set, default social image, typography preset, density, button style, or card radius. Bind the primary color control to the site's existing shared token so every intended primary-color consumer changes consistently across the entire site. Do not expose arbitrary CSS by default. Show every global effect immediately throughout the preview when the browser surface permits it.
 
 ## Destructive and high-impact actions
 
-Differentiate saving content from publishing publicly. Confirm permanent deletion, broad style resets, and publishing when their impact warrants it. Never disguise production actions as preview controls.
+Confirm permanent deletion and broad style resets when their impact warrants it. Keep production writes behind the single explicit `Apply` action and never disguise them as preview controls.

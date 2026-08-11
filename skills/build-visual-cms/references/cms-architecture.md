@@ -7,8 +7,8 @@ The editor preview and public site must render the same public components with d
 Preferred data flow:
 
 ```text
-editor controls -> draft content state -> public components in preview
-                              |-> persistence adapter -> published content -> public pages
+editor controls -> working content state -> public components in preview
+                                |-> Apply -> persistence adapter -> public pages
 ```
 
 ## Content model
@@ -19,13 +19,12 @@ editor controls -> draft content state -> public components in preview
 - Preserve meaningful line breaks and distinguish arrays from multiline strings based on semantics.
 - Keep secrets and operational integration settings outside editable content.
 
-## State and history
+## Working state
 
-- Keep a canonical draft state in the editor.
-- Derive dirty state by comparing against the last saved or published snapshot.
-- Record undo history at meaningful edits and cap its size.
-- Clear redo history after a new edit.
-- Avoid recording initialization, remote hydration, or successful publication as user edits.
+- Keep one canonical working state in the editor.
+- Derive changed state by comparing it against the last applied snapshot.
+- Preview working changes immediately without persisting each keystroke.
+- Do not add draft saving, version history, or undo/redo controls.
 - Keep item selection by ID so reordering does not edit the wrong item.
 
 ## Persistence
@@ -35,8 +34,7 @@ Prefer a narrow boundary such as:
 ```ts
 interface ContentRepository<T> {
   load(): Promise<T>;
-  saveDraft?(content: T): Promise<void>;
-  publish(content: T): Promise<void>;
+  apply(content: T): Promise<void>;
 }
 ```
 
@@ -44,15 +42,9 @@ Adapt this shape to the existing application rather than requiring the exact int
 
 Never silently replace production persistence with browser-only storage. Local storage is acceptable for prototypes only when clearly described.
 
-## Publishing modes
+## Apply behavior
 
-Choose deliberately:
-
-- Immediate save: appropriate for low-risk internal sites.
-- Draft then publish: appropriate when review or safe preview matters.
-- Versioned publish: appropriate when rollback, audit, or multiple editors matter.
-
-Do not implement the most complex mode by default. Match the operational need.
+Expose one operator action labeled `Apply` at the bottom of the left editor pane. Adapt that action to the existing durable write or publication mechanism without exposing separate save-draft and publish controls. Disable it when nothing changed, show applying and failure feedback in place, and keep failed working changes available for retry.
 
 ## Media
 
@@ -62,11 +54,11 @@ Model media fields with the metadata the project actually consumes, such as alte
 
 Always model favicon as a global setting, including a missing-value state that can create the site's first favicon. Update the framework's existing metadata pipeline or add its smallest native favicon mechanism, generate or request required size variants deliberately, and preserve cache-busting behavior. Group other application identity assets when applicable. Treat default Open Graph or social-sharing images as global metadata while allowing page-specific overrides only when the site already supports or needs them.
 
-Provide replacement, removal, and restoration semantics appropriate to each asset. Prevent removal when a required identity or layout asset has no safe fallback. Keep old durable assets recoverable when draft, rollback, or versioning promises require it.
+Provide replacement, removal, and restoration semantics appropriate to each asset. Prevent removal when a required identity or layout asset has no safe fallback.
 
 ## Authentication and authorization
 
-Reuse established authentication. Protect editor routes and every write operation server-side; hiding UI is not authorization. If permissions vary, separate viewing, editing, publishing, and administrative capabilities.
+Reuse established authentication. Protect editor routes and every write operation server-side; hiding UI is not authorization. If permissions vary, separate viewing, applying, and administrative capabilities.
 
 ## Preview isolation
 

@@ -19,7 +19,7 @@
 - Verify dragging starts from its handle without blocking text selection, input editing, links, or buttons.
 - Verify the source placeholder, drag overlay, insertion line or target cell, invalid destination, and empty drop zone communicate the result before drop.
 - Drag through a long collection and confirm only the editor pane auto-scrolls with controlled speed; the outer page and preview pane must not follow.
-- Cancel with `Escape` and an invalid drop, then confirm the original order returns. Complete a drop and confirm focus, selection, position announcement, one undo step, and saved order remain correct.
+- Cancel with `Escape` and an invalid drop, then confirm the original order returns. Complete a drop and confirm focus, selection, position announcement, and applied order remain correct.
 - Confirm provisional preview order appears without saving every pointer movement or forcing unnecessary preview scroll.
 - Confirm editor collections preserve recognizable public direction, grouping, order, and grid relationships at representative widths.
 - Confirm asymmetric layouts preserve featured items, grid areas, and row or column spans. Test a `1–2` composition and ensure the editor does not flatten it into three equal cards.
@@ -32,13 +32,13 @@
 - Test content, background, responsive, logo, favicon or app-icon, and social-sharing image flows when those asset classes exist.
 - Confirm global settings always show favicon controls. Test both replacing an existing favicon and adding the first favicon when no asset or metadata entry exists.
 - Verify required dimensions, aspect ratios, variants, alternative text, safe removal, and restore-default behavior as applicable.
-- Undo and redo representative edits.
-- Verify dirty, saving, saved, publishing, published, and failed feedback as applicable.
-- Verify navigation protection with unsaved changes.
+- Confirm there are no draft-save, publish, undo, or redo buttons.
+- Verify the left editor has one bottom `Apply` action with unchanged, changed, applying, applied, and failed feedback.
+- Verify navigation protection with unapplied changes.
 
 ## Preview and public output
 
-- Compare the same draft in editor preview and public rendering.
+- Compare the same working content in editor preview and public rendering after applying.
 - Check the configured desktop preview width.
 - Select representative pages, sections, fields, and collection items in the editor; confirm the preview changes route or component state as needed, scrolls the target into view, and highlights the correct element.
 - Focus every representative text, multiline, link, media, and nested field without editing; confirm focus alone reveals and highlights its exact preview target. Continue typing and confirm the preview does not repeatedly scroll or steal focus.
@@ -46,13 +46,15 @@
 - Click text, media, button, link, and nested collection fields; confirm the deepest editable target wins instead of selecting only its enclosing section.
 - Select an editor target and confirm only the preview moves; click a preview target and confirm only the editor moves. Verify the initiating pane retains its scroll position in both directions.
 - Confirm editor and preview use independent bounded scroll containers in the desktop editor shell.
+- Confirm the left region is entirely the editor, the right region is entirely the preview, and editing or persistence controls do not intrude above or inside the preview.
 - Confirm the shell fills the available height, the preview uses the remaining width and height, and long preview content remains reachable without outer-page scrolling or clipping.
 - Verify hover and selected highlights remain aligned after preview-container changes, content resizing, and sticky-header scrolling.
 - Confirm source-aware synchronization does not create reflected selection events, scroll loops, repeated navigation, coupled scroll offsets, or lost text-input focus.
 - Reorder and delete selected collection items; confirm stable-ID selection behavior remains predictable.
 - Verify long titles, long words, missing images, empty collections, and maximum realistic item counts.
 - Ensure preview links and forms cannot accidentally trigger unintended production behavior.
-- Confirm global style changes affect all intended consumers and no others.
+- Change the primary color and confirm every intended site-wide consumer updates consistently in preview while unrelated colors remain unchanged.
+- Confirm the whole editor remains visually clean, direct, and concise at the representative desktop size.
 
 ## Engineering checks
 
@@ -66,12 +68,10 @@
 
 ## Persistence and operations
 
-- Reload after saving and confirm durable content.
-- If draft and publish differ, confirm public pages use only the published version.
+- Select `Apply`, reload, and confirm durable content.
 - Test failure and retry without losing edits.
-- Verify rollback or recovery when promised.
 - Confirm media URLs remain durable and have intended access controls.
-- Confirm responsive variants, metadata references, manifests, favicons, and social-sharing consumers resolve the saved assets after reload or publish when applicable.
+- Confirm responsive variants, metadata references, manifests, favicons, and social-sharing consumers resolve the applied assets after reload when applicable.
 - Treat migrations, deployments, and production writes as separate authorized actions.
 
 ## Handoff
@@ -81,7 +81,7 @@ Report:
 - editable areas and intentionally non-editable areas;
 - where content and media are stored;
 - editable image classes, grouped variants, and intentionally excluded assets with reasons;
-- draft and publishing behavior;
+- apply behavior;
 - authentication and permissions;
 - checks completed and known limitations;
 - whether the work is local, staged, or deployed.
