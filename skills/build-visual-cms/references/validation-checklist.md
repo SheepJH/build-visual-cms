@@ -15,7 +15,8 @@
 - Preserve multiline content and intentional empty values.
 - Add, select, edit, reorder, and delete collection items.
 - Confirm selection remains on the correct item after reorder.
-- Reorder representative lists and grids with pointer and keyboard or equivalent move controls.
+- Reorder representative lists and grids with pointer dragging and keyboard operation through the focused drag handle.
+- Confirm keyboard reordering works through the focused drag handle and no standalone up/down arrow buttons are rendered.
 - Verify dragging starts from its handle without blocking text selection, input editing, links, or buttons.
 - Verify the source placeholder, drag overlay, insertion line or target cell, invalid destination, and empty drop zone communicate the result before drop.
 - Drag through a long collection and confirm only the editor pane auto-scrolls with controlled speed; the outer page and preview pane must not follow.
@@ -50,7 +51,9 @@
 - Click text, media, button, link, and nested collection fields; confirm the deepest editable target wins instead of selecting only its enclosing section.
 - Select an editor target and confirm only the preview moves; click a preview target and confirm only the editor moves. Verify the initiating pane retains its scroll position in both directions.
 - Confirm editor and preview use independent bounded scroll containers in the desktop editor shell.
+- Scroll each pane separately and confirm neither the other pane nor the outer page follows under wheel, trackpad, keyboard, selection, or drag auto-scroll interactions.
 - Confirm the left region is entirely the editor, the right region is entirely the preview, and editing or persistence controls do not intrude above or inside the preview.
+- Confirm the editor uses a light neutral or clearly contrasting workspace surface that remains visually distinct from the real preview with accessible text, control, border, focus, and selected-state contrast.
 - Confirm the shell fills the available height, the preview uses the remaining width and height, and long preview content remains reachable without outer-page scrolling or clipping.
 - Verify hover and selected highlights remain aligned after preview-container changes, content resizing, and sticky-header scrolling.
 - Confirm source-aware synchronization does not create reflected selection events, scroll loops, repeated navigation, coupled scroll offsets, or lost text-input focus.

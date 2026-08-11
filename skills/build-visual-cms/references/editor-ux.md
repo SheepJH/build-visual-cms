@@ -2,9 +2,11 @@
 
 ## Layout
 
-Use a stable, preview-first desktop shell with two unmistakable regions: the left side is entirely the editor and the right side is entirely the live preview. Keep the left editor only as wide as its actual controls require and let the right preview consume the remaining space; avoid arbitrary fixed widths that make the editor dominate on large displays.
+Use a stable, preview-first desktop shell with two unmistakable regions: the left side is entirely the editor and the right side is entirely the live preview. Give the editor a light neutral surface by default, or another clearly contrasting workspace surface when necessary, so it remains visually separate from the real site. Do not imitate the preview background so closely that the two panes merge, and do not use literal color inversion that harms readability. Keep text, controls, borders, focus, and selected states accessible.
 
-Fill the available application height below persistent chrome. Give the editor and preview separate bounded scroll containers with a valid shrinking height chain; ensure nested grid or flex children can shrink and scroll instead of being clipped. If preview uses an iframe, size it to its container and make the document itself reachable through preview scrolling.
+Keep the left editor only as wide as its actual controls require and let the right preview consume the remaining space; avoid arbitrary fixed widths that make the editor dominate on large displays.
+
+Fill the available application height below persistent chrome. The editor and preview must always be separate bounded scroll roots with a valid shrinking height chain; ensure nested grid or flex children can shrink and scroll instead of being clipped. If preview uses an iframe, size it to its container and make the document itself reachable through preview scrolling.
 
 Do not put both panes inside one shared vertical scrolling surface, mirror their scroll offsets, or let programmatic scrolling in one pane move the other pane. Never hide overflowing preview content without an accessible scroll path.
 
@@ -84,7 +86,7 @@ Support:
 - adding and immediately focusing the new item;
 - editing in a focused detail area;
 - deletion with confirmation or recovery proportional to risk;
-- drag-and-drop ordering plus keyboard-accessible move controls;
+- drag-and-drop ordering with keyboard operation on the drag handle;
 - empty states that explain how to add the first item;
 - disabled or explanatory states when automatic sorting overrides manual order.
 
@@ -101,7 +103,7 @@ Avoid using array indices as persistent keys.
 - Reflect the provisional order in the preview without persistently saving every pointer movement. Keep a visible preview association for the dragged item without forcing preview scroll when the affected region is already visible.
 - Restore the original order on `Escape`, invalid drop, or cancellation; retain the selected item by stable ID.
 - After drop, move focus back to the item's handle, announce its new position, and animate items briefly without excessive motion.
-- Provide keyboard-accessible pick up, move, drop, and cancel behavior or explicit move controls with equivalent outcomes. Announce position and valid destinations to assistive technology.
+- Provide keyboard-accessible pick up, move, drop, and cancel behavior through the focused drag handle. Arrow keys may move an item while it is in keyboard drag mode, but do not render standalone up/down arrow buttons beside each item. Announce position and valid destinations to assistive technology.
 
 ## Image and identity assets
 
