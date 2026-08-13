@@ -24,7 +24,7 @@ Apply these to every implemented scope:
 - Inspect the relevant project code before designing the CMS. Reuse its framework, routes, components, content sources, design tokens, authentication, storage, and visual conventions.
 - Never invent domain entities that the target site does not contain.
 - Render the real public components in preview; do not maintain preview-only approximations.
-- Make the left pane entirely the compact editor and the right pane entirely the dominant live preview. Use a light neutral or clearly contrasting accessible editor surface.
+- Make the left pane entirely the compact editor and the right pane entirely the dominant live preview. Use a light neutral or clearly contrasting accessible editor surface, a clear page-to-section-to-field hierarchy, consistent control rhythm, and progressive disclosure instead of visual clutter.
 - Give editor and preview separate bounded scroll roots without exception. Synchronize selection, but scroll only the opposite pane; never move the initiating pane or outer page.
 - Preserve the meaningful public structure for every edited surface: layout type, direction, order, grouping, hierarchy, columns, featured items, grid areas, and spans.
 - Match controls to content semantics and preserve existing data compatibility.

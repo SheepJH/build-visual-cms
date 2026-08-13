@@ -32,6 +32,16 @@ Put shared-layout content or content reused across two or more pages in `Global 
 
 Keep the interface visually clean, direct, and sparse. Do not place editing tools or persistence actions above the preview. Put one primary `Apply` button in a fixed or sticky footer at the bottom of the left editor pane. Do not show draft-save, publish, undo, or redo buttons.
 
+## Visual clarity and editing flow
+
+Treat the editor as a quiet working surface, not a second visual centerpiece. Make the operator's path legible at a glance: page, section, selected item, then fields in the same meaningful order as the public content. Show the current location and target with concise headings, tabs, breadcrumbs, or a small status label; do not repeat the same context in multiple controls.
+
+Use one consistent rhythm for labels, inputs, text areas, media previews, helper text, validation, and action spacing. Size controls for their content, align related controls, and keep tap or click targets usable without inflating every row. Prefer native or existing design-system controls and one restrained visual language for borders, radii, typography, and states.
+
+Keep common fields visible and place secondary, advanced, or rarely changed options behind clearly named disclosure controls. Avoid nested cards, excessive borders, decorative icons, instructional paragraphs, and toolbars that do not improve orientation or editing. Use grouping, whitespace, and typography before adding another container.
+
+Keep each media preview adjacent to its replacement controls and each collection summary adjacent to its detail editor. When the editor is narrow, preserve a simple one-column field flow inside the structure-aware representation rather than squeezing labels and inputs into dense multi-column forms.
+
 ## Structure-aware editor representation
 
 Make the editing surface a simplified structural counterpart of the public component, not merely a stack of unrelated form controls. Preserve relationships that help an operator recognize where content appears:

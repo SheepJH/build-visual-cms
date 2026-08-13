@@ -75,6 +75,9 @@ Use the remaining checks only when their feature changed, a failure suggests bro
 - Change the primary color and confirm every intended site-wide consumer updates consistently in preview while unrelated colors remain unchanged.
 - Change the typography or font-family preset and confirm every intended site-wide text consumer updates consistently, the chosen font actually loads, and unrelated icon or code fonts remain unchanged.
 - Confirm the whole editor remains visually clean, direct, and concise at the representative desktop size.
+- Confirm page, section, selected item, and field hierarchy is understandable at a glance without duplicated navigation or explanatory text.
+- Confirm common fields are immediately available, advanced controls are progressively disclosed, and nested cards or decorative chrome do not obscure the editing flow.
+- Confirm labels, inputs, media previews, helper text, validation, and spacing use a consistent visual rhythm.
 
 ## Engineering checks
 
