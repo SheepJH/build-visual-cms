@@ -28,7 +28,7 @@ Apply these to every implemented scope:
 - Give editor and preview separate bounded scroll roots without exception. Synchronize selection, but scroll only the opposite pane; never move the initiating pane or outer page.
 - Preserve the meaningful public structure for every edited surface: layout type, direction, order, grouping, hierarchy, columns, featured items, grid areas, and spans.
 - Match controls to content semantics and preserve existing data compatibility.
-- Always provide global settings for primary color, typography or font family, and favicon. Bind style controls to safe shared tokens and always allow adding the first favicon.
+- When creating a CMS or its global-settings surface, provide primary color, typography or font family, and favicon controls. Bind style controls to safe shared tokens and allow adding the first favicon. For a bounded change to an existing CMS, preserve these controls and change them only when they are in scope.
 - Keep top-level editor navigation to `Global settings` and `Page`; show the page selector only in page mode. Group applicable global controls under Brand, Style, Header, and Footer.
 - Use one primary `Apply` action fixed or sticky at the bottom of the editor. Do not add top save/publish, draft-save, undo, or redo actions.
 - Preserve unrelated user changes. Do not deploy or migrate production data without authorization.
@@ -37,7 +37,9 @@ Apply these to every implemented scope:
 
 Apply a capability only when it exists in the chosen scope; once included, follow its full quality rule rather than treating it as optional polish.
 
+- **Operator-managed content:** For each editable value discovered in scope, expose the meaningful value and supported settings through semantic controls and reflect changes in the real preview. Do not expose derived output, secrets, operational configuration, or controls the public component cannot honor.
 - **Editable fields:** Map each included control to the smallest meaningful preview target. Focus or click reveals and highlights the opposite target once without keystroke scroll loops.
+- **Links:** Let operators edit the visible label when present and the destination URL or internal route. Validate destinations and contain preview navigation so editing cannot unexpectedly leave the CMS.
 - **Lists and grids:** Match the public collection primitive and spatial relationships. Never turn a public vertical list into an editor grid or flatten asymmetric layouts.
 - **Ordered collections:** Provide deliberate drag-and-drop with a handle, destination feedback, editor-local auto-scroll, cancellation, stable IDs, and keyboard operation through the handle. Do not add standalone up/down buttons.
 - **Images:** Inventory operator-relevant images inside the chosen scope and make safe assets editable. For full-site work, inventory all operator-relevant content, background, responsive, branding, app-icon, and social-sharing assets and report exclusions.
@@ -84,7 +86,7 @@ Preview working changes immediately but persist only through the single `Apply` 
 By default:
 
 1. Run the smallest repository-provided format, lint, type, test, or build checks that cover the changed files; run the full production build only when required by the project or no narrower check provides confidence.
-2. Verify one representative edit-to-preview selection flow, independent scrolling in both directions, one relevant global token change, and one Apply-and-reload round trip.
+2. Verify one representative edit-to-preview selection flow, independent scrolling in both directions, one Apply-and-reload round trip, and a relevant global token change only when global settings are in scope.
 3. Run additional checklist items only for capabilities changed in this task.
 
 Do full-page matrices, every-page screenshots, exhaustive asset checks, maximum-data cases, or all-view console sweeps only when the user requests full verification, the chosen scope is full-site and the risk warrants it, or a failure suggests broader impact. Never escalate to exhaustive verification merely because time is available.

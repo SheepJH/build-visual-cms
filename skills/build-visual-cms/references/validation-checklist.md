@@ -7,7 +7,7 @@ Use only the sections and checks relevant to the chosen execution scope and chan
 - Run the narrowest repository-provided checks that cover the changed files.
 - Verify one representative field selection in both directions without coupled scrolling or lost focus.
 - Scroll editor and preview independently.
-- Change one relevant global token and confirm its intended consumers update.
+- When global settings are in scope, change one relevant global token and confirm its intended consumers update.
 - Select `Apply`, reload, and confirm the change persists.
 
 Use the remaining checks only when their feature changed, a failure suggests broader impact, or the user explicitly requests fuller verification. Reserve every-page screenshots, full view matrices, exhaustive asset inventories, maximum-data cases, and broad console sweeps for justified full-site verification.
@@ -24,6 +24,7 @@ Use the remaining checks only when their feature changed, a failure suggests bro
 
 - Load existing content.
 - Edit each representative field type.
+- Edit a representative link label and destination when links are in scope; validate external URLs and internal routes without leaving the editor through preview navigation.
 - Preserve multiline content and intentional empty values.
 - Add, select, edit, reorder, and delete collection items.
 - Confirm selection remains on the correct item after reorder.
@@ -43,8 +44,8 @@ Use the remaining checks only when their feature changed, a failure suggests bro
 - Replace and remove media; test upload error behavior when applicable.
 - Verify every operator-managed image in the discovery inventory is editable, or appears in the exclusion report with a valid reason.
 - Test content, background, responsive, logo, favicon or app-icon, and social-sharing image flows when those asset classes exist.
-- Confirm global settings always show favicon controls. Test both replacing an existing favicon and adding the first favicon when no asset or metadata entry exists.
-- Confirm global settings always show primary-color and typography or font-family controls, even when discovery must introduce the smallest shared token.
+- For a new CMS or global-settings surface, confirm favicon controls support replacing an existing asset and adding the first favicon when none exists. For bounded existing-CMS changes, confirm unrelated favicon controls remain intact.
+- For a new CMS or global-settings surface, confirm primary-color and typography or font-family controls exist, introducing the smallest shared token when necessary. For bounded existing-CMS changes, confirm unrelated global style controls remain intact.
 - Confirm the left editor exposes only `Global settings` and `Page` as top-level choices, with the page selector visible in page mode.
 - Confirm shared logos, header navigation labels, links, order, shared calls to action, and footer content appear once under the appropriate global group instead of being duplicated per page.
 - Confirm page-only tabs and subnavigation remain in their page editor rather than being incorrectly promoted to global settings.

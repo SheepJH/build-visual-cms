@@ -33,6 +33,8 @@ Classify each candidate as one of:
 
 Classify content from a shared layout or content reused across two or more pages as global by default. A tab set, submenu, or navigation control used only inside one page remains page content even if it visually resembles the shared header navigation.
 
+For every operator-managed candidate in scope, identify the meaningful value, supported settings, public consumer, and semantic control. Apply this rule to discovered content types rather than relying on a closed list; do not expose derived output or controls the rendering path cannot honor.
+
 ## Image asset inventory
 
 Inventory operator-relevant images across components, content files, stylesheets, public/static directories, framework metadata, manifests, and storage-backed records. Classify each asset as:
@@ -57,7 +59,7 @@ Trace variants that represent one logical image, including desktop/mobile crops,
 - Use a short text field for labels and concise titles.
 - Use multiline input when intentional line breaks matter.
 - Use rich text only when authors genuinely need formatting; avoid it for structured content.
-- Use a link field with validation for URLs and internal routes.
+- Use a link field with validation for URLs and internal routes. Keep a link's visible label and destination separately editable when both exist.
 - Use an image or media field when the value represents an asset, not a raw URL editing task.
 - Use a list for repeated primitive values.
 - Use a collection for repeated objects with stable IDs.
