@@ -13,41 +13,19 @@
 
 ## 🚀 설치
 
-### 한 번에 설치
+### Codex
 
 ```bash
-npx skills add SheepJH/build-visual-cms@build-visual-cms -g -y
+npx skills add SheepJH/build-visual-cms@build-visual-cms --agent codex --global --yes
 ```
 
-설치한 뒤 Codex 또는 Claude Code를 새로 시작하세요.
-
-<details>
-<summary><strong>Codex에서 직접 설치하기</strong></summary>
-
-Codex에 다음과 같이 요청합니다.
-
-```text
-$skill-installer로 https://github.com/SheepJH/build-visual-cms/tree/main/skills/build-visual-cms 스킬을 설치해줘.
-```
-
-설치 후 다음 대화부터 사용할 수 있습니다.
-
-</details>
-
-<details>
-<summary><strong>Claude Code에 수동 설치하기</strong></summary>
-
-모든 프로젝트에서 사용하려면:
+### Claude Code
 
 ```bash
-git clone --depth 1 https://github.com/SheepJH/build-visual-cms.git /tmp/build-visual-cms
-mkdir -p ~/.claude/skills
-cp -R /tmp/build-visual-cms/skills/build-visual-cms ~/.claude/skills/build-visual-cms
+npx skills add SheepJH/build-visual-cms@build-visual-cms --agent claude-code --global --yes
 ```
 
-특정 프로젝트에서만 사용하려면 스킬 폴더를 해당 프로젝트의 `.claude/skills/build-visual-cms`에 복사하세요.
-
-</details>
+설치한 뒤 해당 도구를 새로 시작하세요. `--global`을 빼면 현재 프로젝트에만 설치됩니다.
 
 ## 🛠️ 사용
 

@@ -1,6 +1,6 @@
 ---
 name: build-visual-cms
-description: Analyze an existing website and design or implement a scope-bounded, preview-first visual CMS with a compact left editing pane, dominant full-height desktop live preview using the real public components, field-focus bidirectional selection, independently scrolling panes, structure-faithful editing, operator-managed images, always-available favicon editing, site-wide style tokens, sortable content, and one bottom Apply action. Use when asked to add a CMS, admin editor, visual content management, live website preview, editable site content, image management, visual selection, or a non-developer editing workflow to an existing web project. Do not assume any industry, page type, or content model.
+description: Build or change a scope-bounded, preview-first content-management editor for an existing website, using its real public components and content model. Use only when the request explicitly concerns a CMS, admin content editor, operator-facing visual editor, or making website content editable through such an editor, or when the user explicitly invokes $build-visual-cms. Do not use for ordinary public-site UI/UX work, visual redesigns, component styling, landing pages, generic dashboards or forms, or standalone previews without content management.
 ---
 
 # Build Visual CMS
