@@ -3,99 +3,99 @@ name: build-visual-cms
 description: Build or change a scope-bounded, preview-first content-management editor for an existing website, using its real public components and content model. Use only when the request explicitly concerns a CMS, admin content editor, operator-facing visual editor, or making website content editable through such an editor, or when the user explicitly invokes $build-visual-cms. Do not use for ordinary public-site UI/UX work, visual redesigns, component styling, landing pages, generic dashboards or forms, or standalone previews without content management.
 ---
 
-# Build Visual CMS
+# 시각적 CMS 구축
 
-Build the smallest CMS that satisfies the requested scope while preserving the public design and making routine changes safe for non-developers.
+공개 디자인을 보존하고 비개발자가 일상적인 변경을 안전하게 수행할 수 있도록, 요청 범위를 충족하는 가장 작은 CMS를 구축한다.
 
-## Choose the execution scope
+## 실행 범위 선택
 
-Choose once before inspecting broadly. Do not invent an effort tier or silently expand scope.
+넓게 조사하기 전에 범위를 한 번 선택한다. 임의의 노력 단계를 만들거나 작업 범위를 조용히 넓히지 않는다.
 
-- **Scoped (default):** When the user names a page, section, feature, or change, inspect, implement, and validate only that scope and its direct shared dependencies.
-- **Representative:** When the user broadly asks for a CMS and the architecture is unproven, implement one representative page or content group plus required global settings first.
-- **Full-site:** Use only when the user explicitly requests the entire site or all pages. Prove the pattern on one representative surface before extending it.
+- **제한 범위(기본):** 사용자가 페이지, 섹션, 기능 또는 변경 사항을 지정하면 해당 범위와 직접 공유되는 의존성만 조사·구현·검증한다.
+- **대표 범위:** 사용자가 CMS를 넓게 요청했고 구조가 검증되지 않았다면, 대표 페이지나 콘텐츠 그룹 하나와 필요한 공통 설정을 먼저 구현한다.
+- **전체 사이트:** 사용자가 전체 사이트나 모든 페이지를 명시적으로 요청한 경우에만 사용한다. 대표 화면 하나에서 패턴을 먼저 검증한 뒤 확장한다.
 
-Do not promote scoped or representative work to full-site on your own. If no material choice requires approval, continue through the chosen scope without pausing merely to report an intermediate milestone.
+제한 범위나 대표 범위를 임의로 전체 사이트 작업으로 승격하지 않는다. 실질적인 승인이 필요한 선택이 없다면 중간 보고만을 위해 멈추지 말고 선택한 범위를 끝까지 진행한다.
 
-## Quality invariants
+## 품질 불변 조건
 
-Apply these to every implemented scope:
+구현하는 모든 범위에 다음을 적용한다.
 
-- Inspect the relevant project code before designing the CMS. Reuse its framework, routes, components, content sources, design tokens, authentication, storage, and visual conventions.
-- Never invent domain entities that the target site does not contain.
-- Render the real public components in preview; do not maintain preview-only approximations.
-- Make the left pane entirely the compact editor and the right pane entirely the dominant live preview. Use a light neutral or clearly contrasting accessible editor surface, a clear page-to-section-to-field hierarchy, consistent control rhythm, and progressive disclosure instead of visual clutter.
-- Give editor and preview separate bounded scroll roots without exception. Synchronize selection, but scroll only the opposite pane; never move the initiating pane or outer page.
-- Preserve the meaningful public structure for every edited surface: layout type, direction, order, grouping, hierarchy, columns, featured items, grid areas, and spans.
-- Match controls to content semantics and preserve existing data compatibility.
-- When creating a CMS or its global-settings surface, provide primary color, typography or font family, and favicon controls. Bind style controls to safe shared tokens and allow adding the first favicon. For a bounded change to an existing CMS, preserve these controls and change them only when they are in scope.
-- Keep top-level editor navigation to `Global settings` and `Page`; show the page selector only in page mode. Group applicable global controls under Brand, Style, Header, and Footer.
-- Use one primary `Apply` action fixed or sticky at the bottom of the editor. Do not add top save/publish, draft-save, undo, or redo actions.
-- Preserve unrelated user changes. Do not deploy or migrate production data without authorization.
+- CMS를 설계하기 전에 관련 프로젝트 코드를 조사한다. 기존 프레임워크, 라우트, 컴포넌트, 콘텐츠 소스, 디자인 토큰, 인증, 저장소와 시각 규칙을 재사용한다.
+- 대상 사이트에 없는 도메인 엔터티를 만들지 않는다.
+- 미리보기에는 실제 공개 컴포넌트를 렌더링한다. 미리보기 전용 근사 구현을 따로 유지하지 않는다.
+- 왼쪽은 전부 간결한 편집기, 오른쪽은 전부 넓은 실시간 미리보기로 구성한다. 편집기는 접근 가능한 밝은 중립색이나 명확히 대비되는 배경, 페이지→섹션→필드의 뚜렷한 계층, 일관된 컨트롤 간격과 점진적 노출을 사용한다.
+- 편집기와 미리보기에 예외 없이 별도의 제한된 스크롤 루트를 둔다. 선택 상태만 동기화하고 반대쪽 영역만 스크롤한다. 시작한 영역이나 바깥 페이지를 움직이지 않는다.
+- 편집 대상의 의미 있는 공개 구조를 보존한다. 레이아웃 유형, 방향, 순서, 그룹, 계층, 열, 강조 항목, 그리드 영역과 span을 포함한다.
+- 콘텐츠 의미에 맞는 컨트롤을 사용하고 기존 데이터 호환성을 보존한다.
+- 새 CMS나 공통 설정 화면을 만들 때 프라이머리 색상, 글씨체와 파비콘 컨트롤을 제공한다. 스타일 컨트롤은 안전한 공통 토큰에 연결하고 첫 파비콘도 추가할 수 있게 한다. 기존 CMS의 제한된 변경에서는 이 컨트롤을 보존하고 범위에 포함된 경우에만 수정한다.
+- 편집기 최상위 탐색은 `공통 설정`과 `페이지`로 제한한다. 페이지 선택기는 페이지 모드에서만 표시하고, 공통 컨트롤은 브랜드·스타일·헤더·푸터로 묶는다.
+- 편집기 하단에 고정하거나 달라붙는 기본 `반영하기` 작업 하나만 둔다. 상단 저장·발행, 초안 저장, 실행 취소와 다시 실행을 추가하지 않는다.
+- 관련 없는 사용자 변경을 보존한다. 승인 없이 배포하거나 운영 데이터를 마이그레이션하지 않는다.
 
-## Conditional capabilities
+## 조건부 기능
 
-Apply a capability only when it exists in the chosen scope; once included, follow its full quality rule rather than treating it as optional polish.
+선택한 범위에 존재하는 기능만 적용한다. 포함하기로 한 기능은 선택적 장식처럼 다루지 말고 해당 품질 규칙을 온전히 따른다.
 
-- **Operator-managed content:** For each editable value discovered in scope, expose the meaningful value and supported settings through semantic controls and reflect changes in the real preview. Do not expose derived output, secrets, operational configuration, or controls the public component cannot honor.
-- **Editable fields:** Map each included control to the smallest meaningful preview target. Focus or click reveals and highlights the opposite target once without keystroke scroll loops.
-- **Links:** Let operators edit the visible label when present and the destination URL or internal route. Validate destinations and contain preview navigation so editing cannot unexpectedly leave the CMS.
-- **Lists and grids:** Match the public collection primitive and spatial relationships. Never turn a public vertical list into an editor grid or flatten asymmetric layouts.
-- **Ordered collections:** Provide deliberate drag-and-drop with a handle, destination feedback, editor-local auto-scroll, cancellation, stable IDs, and keyboard operation through the handle. Do not add standalone up/down buttons.
-- **Images:** Inventory operator-relevant images inside the chosen scope and make safe assets editable. For full-site work, inventory all operator-relevant content, background, responsive, branding, app-icon, and social-sharing assets and report exclusions.
-- **Shared content:** Treat shared-layout content or content reused across two or more pages as global. Keep page-only tabs, navigation, and calls to action inside their page.
-- **Persistence or authentication:** Reuse the existing backend and authorization. Protect every write server-side and keep content operations behind the smallest practical load/apply boundary.
+- **운영자 관리 콘텐츠:** 범위에서 발견한 편집 가능 값마다 의미 있는 값과 지원 설정을 적절한 컨트롤로 제공하고 실제 미리보기에 반영한다. 계산 결과, 비밀 정보, 운영 설정이나 공개 컴포넌트가 지원하지 않는 컨트롤은 노출하지 않는다.
+- **편집 필드:** 각 컨트롤을 가장 작은 의미 단위의 미리보기 대상에 연결한다. 포커스나 클릭 시 반대쪽 대상을 한 번 표시하고 강조하되 입력할 때마다 스크롤하지 않는다.
+- **링크:** 표시 문구가 있다면 문구와 목적지 URL 또는 내부 경로를 각각 수정할 수 있게 한다. 목적지를 검증하고 미리보기 링크 때문에 CMS를 예기치 않게 벗어나지 않도록 막는다.
+- **리스트와 그리드:** 공개 컬렉션의 유형과 공간 관계를 맞춘다. 공개 세로 목록을 편집기 그리드로 바꾸거나 비대칭 레이아웃을 평평하게 만들지 않는다.
+- **순서가 있는 컬렉션:** 전용 손잡이, 목적지 표시, 편집기 내부 자동 스크롤, 취소, 안정적인 ID와 손잡이 기반 키보드 조작을 갖춘 드래그 앤 드롭을 제공한다. 별도의 위·아래 버튼은 추가하지 않는다.
+- **이미지:** 선택한 범위에서 운영자가 관리할 이미지를 조사하고 안전한 자산을 편집 가능하게 한다. 전체 사이트 작업에서는 콘텐츠, 배경, 반응형, 브랜드, 앱 아이콘과 소셜 공유 자산을 모두 조사하고 제외 사유를 보고한다.
+- **공유 콘텐츠:** 공유 레이아웃의 콘텐츠나 두 페이지 이상에서 재사용하는 콘텐츠는 공통으로 처리한다. 한 페이지에만 있는 탭, 탐색과 CTA는 해당 페이지에 둔다.
+- **저장 또는 인증:** 기존 백엔드와 권한 체계를 재사용한다. 모든 쓰기를 서버에서 보호하고 콘텐츠 작업은 가능한 한 작은 불러오기·반영 경계 뒤에 둔다.
 
-## Load references conditionally
+## 참고 문서 조건부 로드
 
-Do not read every reference by default. Read only the files and sections needed for the chosen scope:
+모든 참고 문서를 기본으로 읽지 않는다. 선택한 범위에 필요한 파일과 섹션만 읽는다.
 
-- Read [references/content-discovery.md](references/content-discovery.md) for representative or full-site discovery, a new content model, or asset inventory. Skip it for a narrow change whose sources are already clear.
-- Read [references/cms-architecture.md](references/cms-architecture.md) when persistence, authentication, media storage, working state, or Apply behavior is in scope.
-- Read [references/editor-ux.md](references/editor-ux.md) when building or changing editor layout, selection, scrolling, structure mapping, media controls, global controls, or reordering.
-- Read only the applicable sections of [references/validation-checklist.md](references/validation-checklist.md) after implementation. Do not execute unrelated checklist items.
+- 대표 범위나 전체 사이트 조사, 새 콘텐츠 모델 또는 자산 조사가 필요할 때 [references/content-discovery.md](references/content-discovery.md)를 읽는다. 소스가 분명한 제한된 변경에서는 생략한다.
+- 저장, 인증, 미디어 저장소, 작업 상태 또는 `반영하기` 동작이 범위에 있을 때 [references/cms-architecture.md](references/cms-architecture.md)를 읽는다.
+- 편집기 레이아웃, 선택, 스크롤, 구조 매핑, 미디어, 공통 컨트롤 또는 정렬을 만들거나 바꿀 때 [references/editor-ux.md](references/editor-ux.md)를 읽는다.
+- 구현 후 [references/validation-checklist.md](references/validation-checklist.md)에서 관련 섹션만 읽는다. 관계없는 체크리스트 항목은 실행하지 않는다.
 
-## Workflow
+## 작업 흐름
 
-### 1. Inspect the bounded surface
+### 1. 제한된 대상 조사
 
-Trace the requested surface and its direct consumers end to end. For representative or full-site work, identify shared layouts, global settings, content sources, repeated structures, and operational constraints. Ask only about choices that cannot be inferred safely and materially change the implementation.
+요청한 화면과 직접 소비하는 경로를 끝까지 추적한다. 대표 범위나 전체 사이트 작업에서는 공유 레이아웃, 공통 설정, 콘텐츠 소스, 반복 구조와 운영 제약을 찾는다. 안전하게 추론할 수 없고 구현을 실질적으로 바꾸는 선택만 질문한다.
 
-### 2. Model only discovered content
+### 2. 발견한 콘텐츠만 모델링
 
-Group values into global settings, page or section content, repeatable collections, and non-editable operational settings. Prefer explicit types, stable item IDs, backward-compatible defaults, and a clear distinction between missing and intentionally empty values.
+값을 공통 설정, 페이지·섹션 콘텐츠, 반복 컬렉션과 편집 불가능한 운영 설정으로 나눈다. 명시적인 타입, 안정적인 항목 ID, 하위 호환 기본값과 누락값·의도적 빈값의 구분을 선호한다.
 
-### 3. Design the editor contract
+### 3. 편집기 계약 설계
 
-Keep the left editor compact, clean, and structure-aware beside the dominant preview. Make the common path obvious: choose global or page scope, select a section or item, edit while reviewing preview, then select `Apply`.
+넓은 미리보기 옆에 간결하고 깔끔하며 구조를 반영한 왼쪽 편집기를 둔다. 공통 또는 페이지 범위 선택→섹션이나 항목 선택→미리보며 편집→`반영하기`의 일반 흐름을 분명하게 만든다.
 
-Treat editor and preview as coordinated views of one content tree. Use stable target IDs and source-aware selection so route changes, tabs, highlights, and opposite-pane scrolling cannot loop or steal focus.
+편집기와 미리보기를 하나의 콘텐츠 트리를 보는 두 화면으로 취급한다. 안정적인 대상 ID와 시작 위치를 아는 선택 상태를 사용하여 라우트 변경, 탭, 강조와 반대쪽 스크롤이 반복되거나 포커스를 빼앗지 않게 한다.
 
-### 4. Prove before expanding
+### 4. 확장 전 검증
 
-For representative or full-site work, implement one representative page or content group first, including real preview rendering, field selection, independent scrolling, global tokens, and Apply behavior. Pass the bounded validation budget before copying the pattern to more pages. Do not build every page first and validate afterward.
+대표 범위나 전체 사이트 작업에서는 대표 페이지 또는 콘텐츠 그룹 하나를 먼저 구현한다. 실제 미리보기, 필드 선택, 독립 스크롤, 공통 토큰과 `반영하기`를 포함한다. 제한된 검증 예산을 통과한 뒤 다른 페이지로 패턴을 복사한다. 모든 페이지를 먼저 만들고 나중에 검증하지 않는다.
 
-Extend only the proven pattern and only through the chosen scope. Prefer the minimum code that satisfies the invariants; do not build a universal form engine or create auxiliary implementation documents.
+검증한 패턴만 선택한 범위까지 확장한다. 불변 조건을 만족하는 최소 코드를 선호하며 범용 폼 엔진이나 보조 구현 문서를 만들지 않는다.
 
-### 5. Apply safely
+### 5. 안전하게 반영
 
-Preview working changes immediately but persist only through the single `Apply` action. Distinguish unchanged, changed, applying, applied, and failed states without adding more actions. Warn before losing unapplied work and retain failed changes for retry.
+작업 중 변경은 즉시 미리보기에 보여주되 단일 `반영하기`를 통해서만 저장한다. 작업을 늘리지 않고 변경 없음, 변경됨, 반영 중, 반영 완료와 실패 상태를 구분한다. 반영하지 않은 변경을 잃기 전에 경고하고 실패한 변경은 재시도를 위해 유지한다.
 
-### 6. Validate within budget
+### 6. 예산 안에서 검증
 
-By default:
+기본적으로 다음만 수행한다.
 
-1. Run the smallest repository-provided format, lint, type, test, or build checks that cover the changed files; run the full production build only when required by the project or no narrower check provides confidence.
-2. Verify one representative edit-to-preview selection flow, independent scrolling in both directions, one Apply-and-reload round trip, and a relevant global token change only when global settings are in scope.
-3. Run additional checklist items only for capabilities changed in this task.
+1. 변경 파일을 다루는 가장 작은 저장소 제공 format, lint, type, test 또는 build 검사를 실행한다. 프로젝트가 요구하거나 더 좁은 검사로 확신을 얻을 수 없을 때만 전체 운영 빌드를 실행한다.
+2. 대표적인 편집→미리보기 선택 흐름, 양방향 독립 스크롤, `반영하기` 후 새로고침을 검증한다. 공통 설정이 범위에 있을 때만 관련 전역 토큰 변경을 확인한다.
+3. 이번 작업에서 변경한 기능에 해당하는 체크리스트만 추가로 실행한다.
 
-Do full-page matrices, every-page screenshots, exhaustive asset checks, maximum-data cases, or all-view console sweeps only when the user requests full verification, the chosen scope is full-site and the risk warrants it, or a failure suggests broader impact. Never escalate to exhaustive verification merely because time is available.
+사용자가 전체 검증을 요청하거나, 전체 사이트 범위의 위험이 정당화하거나, 실패가 더 넓은 문제를 시사할 때만 전체 페이지 행렬, 모든 페이지 스크린샷, 전수 자산 검사, 최대 데이터와 전체 화면 콘솔 검사를 수행한다. 시간이 남는다는 이유만으로 전수 검증으로 승격하지 않는다.
 
-Report the implemented scope, Apply behavior, checks performed, intentionally unimplemented areas, and whether work is local, staged, or deployed.
+구현 범위, `반영하기` 동작, 수행한 검사, 의도적으로 구현하지 않은 영역과 작업이 로컬·스테이징·배포 중 어디까지 진행됐는지 보고한다.
 
-## Scope control
+## 범위 통제
 
-- If the user asks only for a proposal or audit, do not modify files.
-- If authentication or persistence is undecided, implement only the safe local/editor boundary unless the user chooses the missing system.
-- If CMS capability requires a major framework rewrite, present the smallest viable integration and its tradeoffs before expanding.
-- Prior-project examples are patterns, never default content models.
+- 사용자가 제안이나 감사만 요청하면 파일을 수정하지 않는다.
+- 인증이나 저장 방식이 결정되지 않았다면 사용자가 선택하기 전까지 안전한 로컬·편집기 경계만 구현한다.
+- CMS 기능에 큰 프레임워크 재작성이 필요하면 확장 전에 가장 작은 통합안과 장단점을 제시한다.
+- 이전 프로젝트 예시는 패턴일 뿐 기본 콘텐츠 모델로 사용하지 않는다.

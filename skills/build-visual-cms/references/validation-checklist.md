@@ -1,111 +1,111 @@
-# Validation checklist
+# 검증 체크리스트
 
-Use only the sections and checks relevant to the chosen execution scope and changed capabilities. This file is a menu, not a requirement to execute every item.
+선택한 실행 범위와 변경 기능에 해당하는 섹션·항목만 사용한다. 이 파일은 전부 실행해야 하는 요구사항이 아니라 선택 목록이다.
 
-## Default budget
+## 기본 예산
 
-- Run the narrowest repository-provided checks that cover the changed files.
-- Verify one representative field selection in both directions without coupled scrolling or lost focus.
-- Scroll editor and preview independently.
-- When global settings are in scope, change one relevant global token and confirm its intended consumers update.
-- Select `Apply`, reload, and confirm the change persists.
+- 변경 파일을 다루는 가장 좁은 저장소 제공 검사를 실행한다.
+- 대표 필드 하나를 양방향으로 선택하고 스크롤 결합이나 포커스 손실이 없는지 확인한다.
+- 편집기와 미리보기를 각각 독립적으로 스크롤한다.
+- 공통 설정이 범위에 있을 때 관련 전역 토큰 하나를 바꾸고 의도한 소비자가 갱신되는지 확인한다.
+- `반영하기`를 선택하고 새로고침한 뒤 변경이 유지되는지 확인한다.
 
-Use the remaining checks only when their feature changed, a failure suggests broader impact, or the user explicitly requests fuller verification. Reserve every-page screenshots, full view matrices, exhaustive asset inventories, maximum-data cases, and broad console sweeps for justified full-site verification.
+나머지 검사는 해당 기능을 변경했거나 실패가 더 넓은 문제를 시사하거나 사용자가 더 넓은 검증을 명시적으로 요청했을 때만 사용한다. 모든 페이지 스크린샷, 전체 화면 행렬, 전수 자산 조사, 최대 데이터와 광범위한 콘솔 검사는 정당화되는 전체 사이트 검증에만 사용한다.
 
-## Architecture
+## 구조
 
-- Public pages and editor preview use the same rendering components.
-- Content types and stored data remain compatible.
-- Collection items have stable unique IDs.
-- Authentication protects routes and write operations.
-- Secrets and operational settings are not exposed as content.
+- 공개 페이지와 편집기 미리보기가 같은 렌더링 컴포넌트를 사용한다.
+- 콘텐츠 타입과 저장 데이터의 호환성을 유지한다.
+- 컬렉션 항목에 안정적인 고유 ID가 있다.
+- 인증이 라우트와 쓰기 작업을 보호한다.
+- 비밀 정보와 운영 설정을 콘텐츠로 노출하지 않는다.
 
-## Editing flows
+## 편집 흐름
 
-- Load existing content.
-- Edit each representative field type.
-- Edit a representative link label and destination when links are in scope; validate external URLs and internal routes without leaving the editor through preview navigation.
-- Preserve multiline content and intentional empty values.
-- Add, select, edit, reorder, and delete collection items.
-- Confirm selection remains on the correct item after reorder.
-- Reorder representative lists and grids with pointer dragging and keyboard operation through the focused drag handle.
-- Confirm keyboard reordering works through the focused drag handle and no standalone up/down arrow buttons are rendered.
-- Verify dragging starts from its handle without blocking text selection, input editing, links, or buttons.
-- Verify the source placeholder, drag overlay, insertion line or target cell, invalid destination, and empty drop zone communicate the result before drop.
-- Drag through a long collection and confirm only the editor pane auto-scrolls with controlled speed; the outer page and preview pane must not follow.
-- Cancel with `Escape` and an invalid drop, then confirm the original order returns. Complete a drop and confirm focus, selection, position announcement, and applied order remain correct.
-- Confirm provisional preview order appears without saving every pointer movement or forcing unnecessary preview scroll.
-- Confirm editor collections preserve recognizable public direction, grouping, order, and grid relationships at representative widths.
-- Confirm asymmetric layouts preserve featured items, grid areas, and row or column spans. Test a `1–2` composition and ensure the editor does not flatten it into three equal cards.
-- Confirm public vertical lists remain one-column editor lists and are not converted into multi-column card grids for compactness.
-- Confirm public horizontal lists, grids, tables, tabs, accordions, and carousels use the corresponding editor representation when present.
-- In a compact editor pane, confirm the structural miniature retains the public columns, spans, grouping, emphasis, and source order instead of changing layout type.
-- Verify complex structures such as split layouts, tabs, accordions, carousels, and nested groups remain understandable without flattening everything into a single form.
-- Replace and remove media; test upload error behavior when applicable.
-- Verify every operator-managed image in the discovery inventory is editable, or appears in the exclusion report with a valid reason.
-- Test content, background, responsive, logo, favicon or app-icon, and social-sharing image flows when those asset classes exist.
-- For a new CMS or global-settings surface, confirm favicon controls support replacing an existing asset and adding the first favicon when none exists. For bounded existing-CMS changes, confirm unrelated favicon controls remain intact.
-- For a new CMS or global-settings surface, confirm primary-color and typography or font-family controls exist, introducing the smallest shared token when necessary. For bounded existing-CMS changes, confirm unrelated global style controls remain intact.
-- Confirm the left editor exposes only `Global settings` and `Page` as top-level choices, with the page selector visible in page mode.
-- Confirm shared logos, header navigation labels, links, order, shared calls to action, and footer content appear once under the appropriate global group instead of being duplicated per page.
-- Confirm page-only tabs and subnavigation remain in their page editor rather than being incorrectly promoted to global settings.
-- Verify required dimensions, aspect ratios, variants, alternative text, safe removal, and restore-default behavior as applicable.
-- Confirm there are no draft-save, publish, undo, or redo buttons.
-- Verify the left editor has one bottom `Apply` action with unchanged, changed, applying, applied, and failed feedback.
-- Verify navigation protection with unapplied changes.
+- 기존 콘텐츠를 불러온다.
+- 대표 필드 유형을 각각 편집한다.
+- 링크가 범위에 있으면 대표 링크의 표시 문구와 목적지를 편집한다. CMS를 벗어나지 않고 외부 URL과 내부 경로를 검증한다.
+- 여러 줄 콘텐츠와 의도적인 빈값을 보존한다.
+- 컬렉션 항목을 추가·선택·편집·재정렬·삭제한다.
+- 재정렬 후 올바른 항목의 선택 상태가 유지되는지 확인한다.
+- 대표 리스트와 그리드를 포인터와 포커스된 손잡이의 키보드 조작으로 재정렬한다.
+- 별도의 위·아래 버튼 없이 손잡이에서 키보드 재정렬이 동작하는지 확인한다.
+- 텍스트 선택, 입력, 링크와 버튼을 방해하지 않고 손잡이에서만 드래그가 시작되는지 확인한다.
+- source placeholder, drag overlay, 삽입선·대상 cell, 유효하지 않은 목적지와 빈 drop zone이 drop 전에 결과를 알리는지 확인한다.
+- 긴 컬렉션에서 편집기만 제어된 속도로 자동 스크롤되고 바깥 페이지와 미리보기는 움직이지 않는지 확인한다.
+- `Escape`와 유효하지 않은 drop에서 원래 순서가 복원되는지 확인한다. 정상 drop 후 포커스, 선택, 위치 안내와 반영 순서가 올바른지 확인한다.
+- 포인터 이동마다 저장하거나 불필요하게 미리보기를 스크롤하지 않고 임시 순서가 미리보기에 나타나는지 확인한다.
+- 대표 폭에서 컬렉션의 공개 방향, 그룹, 순서와 그리드 관계를 알아볼 수 있게 보존하는지 확인한다.
+- 비대칭 레이아웃이 강조 항목, grid area와 행·열 span을 보존하는지 확인한다. `1–2` 구성이 세 개의 같은 카드로 평평해지지 않는지 검사한다.
+- 공개 세로 목록이 다중 열 카드 그리드가 아니라 한 열 편집 목록으로 유지되는지 확인한다.
+- 공개 가로 목록, 그리드, 표, 탭, accordion과 carousel이 존재할 때 대응하는 편집 표현을 사용하는지 확인한다.
+- 좁은 편집기에서 구조 축약본이 레이아웃 유형을 바꾸지 않고 공개 열, span, 그룹, 강조와 소스 순서를 유지하는지 확인한다.
+- 분할 레이아웃, 탭, accordion, carousel과 중첩 그룹을 하나의 폼으로 평평하게 만들지 않고 이해 가능하게 유지하는지 확인한다.
+- 미디어를 교체·제거하고 해당하면 업로드 오류를 검사한다.
+- 조사한 모든 운영자 관리 이미지가 편집 가능하거나 유효한 이유와 함께 제외 목록에 있는지 확인한다.
+- 해당 자산이 존재하면 콘텐츠, 배경, 반응형, 로고, 파비콘·앱 아이콘과 소셜 공유 이미지 흐름을 검사한다.
+- 새 CMS나 공통 설정에서는 기존 파비콘 교체와 파비콘이 없을 때 첫 자산 추가를 지원하는지 확인한다. 기존 CMS의 제한된 변경에서는 관련 없는 파비콘 컨트롤이 유지되는지 확인한다.
+- 새 CMS나 공통 설정에서는 프라이머리 색상과 글씨체 컨트롤이 있으며 필요하면 가장 작은 공통 토큰을 만드는지 확인한다. 기존 CMS의 제한된 변경에서는 관련 없는 공통 스타일 컨트롤이 유지되는지 확인한다.
+- 왼쪽 편집기의 최상위 선택이 `공통 설정`과 `페이지`뿐이며 페이지 선택기가 페이지 모드에서 보이는지 확인한다.
+- 공유 로고, 헤더 메뉴 문구·링크·순서, 공통 CTA와 푸터 콘텐츠가 페이지마다 복제되지 않고 올바른 공통 그룹에 한 번만 나타나는지 확인한다.
+- 페이지 전용 탭과 하위 탐색이 공통 설정으로 잘못 승격되지 않고 해당 페이지에 남는지 확인한다.
+- 해당하면 필요한 치수, 비율, variant, 대체 텍스트, 안전한 제거와 기본값 복원을 확인한다.
+- 초안 저장, 발행, undo나 redo 버튼이 없는지 확인한다.
+- 왼쪽 편집기 하단에 변경 없음, 변경됨, 반영 중, 완료와 실패 피드백을 가진 `반영하기` 하나만 있는지 확인한다.
+- 반영하지 않은 변경이 있을 때 탐색 보호가 동작하는지 확인한다.
 
-## Preview and public output
+## 미리보기와 공개 결과
 
-- Compare the same working content in editor preview and public rendering after applying.
-- Check the configured desktop preview width.
-- Select representative pages, sections, fields, and collection items in the editor; confirm the preview changes route or component state as needed, scrolls the target into view, and highlights the correct element.
-- Focus every representative text, multiline, link, media, and nested field without editing; confirm focus alone reveals and highlights its exact preview target. Continue typing and confirm the preview does not repeatedly scroll or steal focus.
-- Click representative editable targets in the preview; confirm the editor reveals and selects the exact corresponding target.
-- Click text, media, button, link, and nested collection fields; confirm the deepest editable target wins instead of selecting only its enclosing section.
-- Select an editor target and confirm only the preview moves; click a preview target and confirm only the editor moves. Verify the initiating pane retains its scroll position in both directions.
-- Confirm editor and preview use independent bounded scroll containers in the desktop editor shell.
-- Scroll each pane separately and confirm neither the other pane nor the outer page follows under wheel, trackpad, keyboard, selection, or drag auto-scroll interactions.
-- Confirm the left region is entirely the editor, the right region is entirely the preview, and editing or persistence controls do not intrude above or inside the preview.
-- Confirm the editor uses a light neutral or clearly contrasting workspace surface that remains visually distinct from the real preview with accessible text, control, border, focus, and selected-state contrast.
-- Confirm the shell fills the available height, the preview uses the remaining width and height, and long preview content remains reachable without outer-page scrolling or clipping.
-- Verify hover and selected highlights remain aligned after preview-container changes, content resizing, and sticky-header scrolling.
-- Confirm source-aware synchronization does not create reflected selection events, scroll loops, repeated navigation, coupled scroll offsets, or lost text-input focus.
-- Reorder and delete selected collection items; confirm stable-ID selection behavior remains predictable.
-- Verify long titles, long words, missing images, empty collections, and maximum realistic item counts.
-- Ensure preview links and forms cannot accidentally trigger unintended production behavior.
-- Change the primary color and confirm every intended site-wide consumer updates consistently in preview while unrelated colors remain unchanged.
-- Change the typography or font-family preset and confirm every intended site-wide text consumer updates consistently, the chosen font actually loads, and unrelated icon or code fonts remain unchanged.
-- Confirm the whole editor remains visually clean, direct, and concise at the representative desktop size.
-- Confirm page, section, selected item, and field hierarchy is understandable at a glance without duplicated navigation or explanatory text.
-- Confirm common fields are immediately available, advanced controls are progressively disclosed, and nested cards or decorative chrome do not obscure the editing flow.
-- Confirm labels, inputs, media previews, helper text, validation, and spacing use a consistent visual rhythm.
+- 같은 작업 콘텐츠를 편집기 미리보기와 반영 후 공개 렌더링에서 비교한다.
+- 설정한 데스크톱 미리보기 폭을 확인한다.
+- 대표 페이지, 섹션, 필드와 컬렉션 항목을 편집기에서 선택한다. 미리보기가 필요한 라우트·컴포넌트 상태로 바뀌고 대상을 보이게 스크롤하며 올바른 요소를 강조하는지 확인한다.
+- 대표 텍스트, 여러 줄, 링크, 미디어와 중첩 필드를 편집하지 않고 포커스한다. 포커스만으로 정확한 미리보기 대상이 표시·강조되는지 확인한다. 계속 입력해도 미리보기가 반복 스크롤하거나 포커스를 빼앗지 않는지 확인한다.
+- 대표 편집 가능 대상을 미리보기에서 클릭하고 정확한 편집기 대상이 표시·선택되는지 확인한다.
+- 텍스트, 미디어, 버튼, 링크와 중첩 컬렉션 필드를 클릭하고 상위 섹션만 선택하지 않고 가장 깊은 편집 대상이 선택되는지 확인한다.
+- 편집기에서 대상을 선택하면 미리보기만 움직이고 미리보기에서 대상을 클릭하면 편집기만 움직이는지 확인한다. 두 방향 모두 시작한 영역의 스크롤이 유지돼야 한다.
+- 데스크톱 편집기 shell에서 편집기와 미리보기가 별도의 제한된 스크롤 컨테이너를 사용하는지 확인한다.
+- wheel, trackpad, 키보드, 선택과 drag auto-scroll로 각 영역을 스크롤해도 다른 영역이나 바깥 페이지가 따라오지 않는지 확인한다.
+- 왼쪽은 전부 편집기, 오른쪽은 전부 미리보기이며 편집·저장 컨트롤이 미리보기 위나 내부에 침범하지 않는지 확인한다.
+- 편집기가 실제 미리보기와 시각적으로 구분되는 밝은 중립색 또는 명확한 작업 배경을 사용하며 텍스트, 컨트롤, 테두리, 포커스와 선택 대비가 접근 가능한지 확인한다.
+- shell이 사용 가능한 높이를 채우고 미리보기가 남은 폭·높이를 사용하며 긴 콘텐츠를 바깥 페이지 스크롤이나 clipping 없이 접근할 수 있는지 확인한다.
+- 미리보기 컨테이너 변경, 콘텐츠 resize와 sticky header 스크롤 후에도 hover와 선택 강조 위치가 맞는지 확인한다.
+- 시작 위치를 아는 동기화가 반사 선택 event, scroll loop, 반복 탐색, 결합된 scroll offset이나 텍스트 입력 포커스 손실을 만들지 않는지 확인한다.
+- 선택한 컬렉션 항목을 재정렬·삭제하고 안정적인 ID 기반 선택 동작이 예측 가능한지 확인한다.
+- 긴 제목, 긴 단어, 누락 이미지, 빈 컬렉션과 현실적인 최대 항목 수를 검사한다.
+- 미리보기 링크와 폼이 의도하지 않은 운영 동작을 실행하지 못하게 한다.
+- 프라이머리 색상을 바꾸고 의도한 모든 사이트 공통 소비자가 일관되게 갱신되며 관계없는 색상은 유지되는지 확인한다.
+- 글씨체 preset을 바꾸고 의도한 모든 공통 텍스트가 일관되게 갱신되며 선택한 폰트가 실제로 로드되고 관계없는 icon·code font가 유지되는지 확인한다.
+- 대표 데스크톱 크기에서 편집기 전체가 깔끔하고 직접적이며 간결한지 확인한다.
+- 페이지, 섹션, 선택 항목과 필드 계층을 중복 탐색이나 설명 없이 한눈에 이해할 수 있는지 확인한다.
+- 일반 필드는 즉시 보이고 고급 컨트롤은 점진적으로 노출되며 중첩 카드와 장식 chrome이 편집 흐름을 가리지 않는지 확인한다.
+- 라벨, 입력창, 미디어 미리보기, 도움말, validation과 간격에 일관된 시각 리듬이 있는지 확인한다.
 
-## Engineering checks
+## 엔지니어링 검사
 
-- Run repository-provided formatting, lint, type, test, and production build commands as relevant.
-- Inspect browser console and server logs for new errors.
-- Test keyboard navigation and visible focus for editor controls.
-- Respect reduced-motion preferences for reorder transitions and avoid disorienting layout animation.
-- Confirm every preview-selectable target can also be reached without relying on pointer interaction.
-- Verify labels, buttons, dialogs, and drag alternatives are accessible.
-- Check that unrelated user changes remain intact.
+- 관련 저장소 제공 format, lint, type, test와 운영 build 명령을 실행한다.
+- 브라우저 console과 server log에서 새 오류를 확인한다.
+- 편집기 컨트롤의 키보드 탐색과 보이는 포커스를 검사한다.
+- 재정렬 transition에서 reduced motion 설정을 존중하고 방향 감각을 잃게 하는 animation을 피한다.
+- 미리보기에서 선택할 수 있는 모든 대상에 포인터 없이도 접근할 수 있는지 확인한다.
+- 라벨, 버튼, dialog와 drag 대안의 접근성을 확인한다.
+- 관계없는 사용자 변경이 유지되는지 확인한다.
 
-## Persistence and operations
+## 저장과 운영
 
-- Select `Apply`, reload, and confirm durable content.
-- Test failure and retry without losing edits.
-- Confirm media URLs remain durable and have intended access controls.
-- Confirm responsive variants, metadata references, manifests, favicons, and social-sharing consumers resolve the applied assets after reload when applicable.
-- Treat migrations, deployments, and production writes as separate authorized actions.
+- `반영하기`를 선택하고 새로고침한 뒤 콘텐츠가 영구 유지되는지 확인한다.
+- 실패와 재시도 시 편집 내용이 사라지지 않는지 확인한다.
+- 미디어 URL이 영구적이며 의도한 접근 제어를 가지는지 확인한다.
+- 해당하면 반응형 variant, 메타데이터 참조, manifest, 파비콘과 소셜 공유 소비자가 새로고침 후 반영한 자산을 올바르게 해석하는지 확인한다.
+- 마이그레이션, 배포와 운영 쓰기는 별도 승인 작업으로 다룬다.
 
-## Handoff
+## 인계
 
-Report:
+다음을 보고한다.
 
-- editable areas and intentionally non-editable areas;
-- where content and media are stored;
-- editable image classes, grouped variants, and intentionally excluded assets with reasons;
-- apply behavior;
-- authentication and permissions;
-- checks completed and known limitations;
-- whether the work is local, staged, or deployed.
+- 편집 가능 영역과 의도적으로 편집하지 않는 영역
+- 콘텐츠와 미디어 저장 위치
+- 편집 가능한 이미지 유형, 묶인 variant와 제외한 자산·사유
+- `반영하기` 동작
+- 인증과 권한
+- 완료한 검사와 알려진 제한
+- 작업이 로컬, 스테이징 또는 배포 중 어디까지 진행됐는지

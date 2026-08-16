@@ -1,162 +1,162 @@
-# Editor UX
+# 편집기 UX
 
-## Layout
+## 레이아웃
 
-Use a stable, preview-first desktop shell with two unmistakable regions: the left side is entirely the editor and the right side is entirely the live preview. Give the editor a light neutral surface by default, or another clearly contrasting workspace surface when necessary, so it remains visually separate from the real site. Do not imitate the preview background so closely that the two panes merge, and do not use literal color inversion that harms readability. Keep text, controls, borders, focus, and selected states accessible.
+안정적인 미리보기 중심 데스크톱 shell을 사용하고 두 영역을 분명히 구분한다. 왼쪽은 전부 편집기, 오른쪽은 전부 실시간 미리보기다. 편집기는 기본적으로 밝은 중립색을 사용하거나 필요할 때 명확히 대비되는 작업 배경을 사용해 실제 사이트와 시각적으로 분리한다. 두 영역이 합쳐 보일 만큼 미리보기 배경을 흉내 내거나 가독성을 해치는 단순 색상 반전을 사용하지 않는다. 텍스트, 컨트롤, 테두리, 포커스와 선택 상태의 접근성을 유지한다.
 
-Keep the left editor only as wide as its actual controls require and let the right preview consume the remaining space; avoid arbitrary fixed widths that make the editor dominate on large displays.
+왼쪽 편집기는 실제 컨트롤에 필요한 폭만 사용하고 오른쪽 미리보기가 나머지를 차지하게 한다. 큰 화면에서 편집기가 우세해지는 임의의 고정 폭을 피한다.
 
-Fill the available application height below persistent chrome. The editor and preview must always be separate bounded scroll roots with a valid shrinking height chain; ensure nested grid or flex children can shrink and scroll instead of being clipped. If preview uses an iframe, size it to its container and make the document itself reachable through preview scrolling.
+고정 chrome 아래의 사용 가능한 애플리케이션 높이를 채운다. 편집기와 미리보기는 항상 별도의 제한된 스크롤 루트를 사용하며 내부 grid·flex 자식이 잘리기보다 줄어들고 스크롤되도록 유효한 높이 축소 체인을 구성한다. iframe 미리보기는 컨테이너에 맞추고 문서 전체를 미리보기 스크롤로 접근할 수 있게 한다.
 
-Do not put both panes inside one shared vertical scrolling surface, mirror their scroll offsets, or let programmatic scrolling in one pane move the other pane. Never hide overflowing preview content without an accessible scroll path.
+두 영역을 하나의 세로 스크롤에 넣거나 스크롤 offset을 복제하거나 한쪽의 programmatic scroll이 다른 쪽을 움직이게 하지 않는다. 접근 가능한 스크롤 경로 없이 긴 미리보기 콘텐츠를 숨기지 않는다.
 
-Keep top-level navigation to two clear choices and show the page selector only in page mode:
-
-```text
-[Global settings] [Page]
-                  Page: [selected page]
-```
-
-Within `Global settings`, group applicable controls in this order:
+최상위 탐색은 두 선택지만 두고 페이지 선택기는 페이지 모드에서만 표시한다.
 
 ```text
-Brand -> logo, favicon, identity assets
-Style -> primary color, typography or font family
-Header -> shared navigation labels, links, order, shared call to action
-Footer -> shared contact details, links, social links
+[공통 설정] [페이지]
+            페이지: [선택한 페이지]
 ```
 
-Within `Page`, continue from page to section, collection item, and field. Do not show the entire site schema as one long form. Preserve context by displaying the current page, section, and selected item.
+`공통 설정`에서는 해당 컨트롤을 다음 순서로 묶는다.
 
-Put shared-layout content or content reused across two or more pages in `Global settings` by default. Keep page-only tabs, subnavigation, and calls to action inside their page. Do not duplicate the same shared header or footer controls under every page.
+```text
+브랜드 -> 로고, 파비콘, 식별 자산
+스타일 -> 프라이머리 색상, 글씨체
+헤더 -> 공유 메뉴 문구, 링크, 순서, 공통 CTA
+푸터 -> 공통 연락처, 링크, 소셜 링크
+```
 
-Keep the interface visually clean, direct, and sparse. Do not place editing tools or persistence actions above the preview. Put one primary `Apply` button in a fixed or sticky footer at the bottom of the left editor pane. Do not show draft-save, publish, undo, or redo buttons.
+`페이지`에서는 페이지→섹션→컬렉션 항목→필드 순으로 이어진다. 전체 사이트 스키마를 하나의 긴 폼으로 노출하지 않는다. 현재 페이지, 섹션과 선택 항목을 표시해 맥락을 유지한다.
 
-## Visual clarity and editing flow
+공유 레이아웃 콘텐츠나 두 페이지 이상에서 재사용하는 콘텐츠는 기본적으로 `공통 설정`에 둔다. 페이지 전용 탭, 하위 탐색과 CTA는 해당 페이지에 둔다. 같은 헤더·푸터 컨트롤을 페이지마다 복제하지 않는다.
 
-Treat the editor as a quiet working surface, not a second visual centerpiece. Make the operator's path legible at a glance: page, section, selected item, then fields in the same meaningful order as the public content. Show the current location and target with concise headings, tabs, breadcrumbs, or a small status label; do not repeat the same context in multiple controls.
+인터페이스를 시각적으로 깔끔하고 직접적이며 간결하게 유지한다. 미리보기 위에 편집 도구나 저장 작업을 놓지 않는다. 왼쪽 편집기 하단의 고정·sticky footer에 기본 `반영하기` 버튼 하나를 둔다. 초안 저장, 발행, undo나 redo 버튼을 표시하지 않는다.
 
-Use one consistent rhythm for labels, inputs, text areas, media previews, helper text, validation, and action spacing. Size controls for their content, align related controls, and keep tap or click targets usable without inflating every row. Prefer native or existing design-system controls and one restrained visual language for borders, radii, typography, and states.
+## 시각적 명료성과 편집 흐름
 
-Keep common fields visible and place secondary, advanced, or rarely changed options behind clearly named disclosure controls. Avoid nested cards, excessive borders, decorative icons, instructional paragraphs, and toolbars that do not improve orientation or editing. Use grouping, whitespace, and typography before adding another container.
+편집기는 두 번째 시각적 중심이 아니라 조용한 작업 화면으로 다룬다. 페이지→섹션→선택 항목→공개 콘텐츠와 같은 의미 순서의 필드 흐름을 한눈에 알 수 있게 한다. 간결한 제목, 탭, breadcrumb나 작은 상태 라벨로 현재 위치와 대상을 표시하되 같은 맥락을 여러 컨트롤에서 반복하지 않는다.
 
-Keep each media preview adjacent to its replacement controls and each collection summary adjacent to its detail editor. When the editor is narrow, preserve a simple one-column field flow inside the structure-aware representation rather than squeezing labels and inputs into dense multi-column forms.
+라벨, 입력창, textarea, 미디어 미리보기, 도움말, validation과 작업 간격에 하나의 일관된 리듬을 사용한다. 콘텐츠에 맞는 컨트롤 크기와 관련 컨트롤 정렬을 사용하고 모든 행을 부풀리지 않으면서 클릭·터치 대상을 충분히 확보한다. 네이티브 또는 기존 디자인 시스템 컨트롤을 우선하며 테두리, radius, 글자와 상태 표현에 절제된 하나의 시각 언어를 사용한다.
 
-## Structure-aware editor representation
+자주 쓰는 필드는 바로 보여주고 보조·고급·저빈도 설정은 명확한 이름의 펼침 컨트롤 뒤에 둔다. 방향 파악이나 편집에 도움 되지 않는 중첩 카드, 과도한 테두리, 장식 아이콘, 긴 설명과 toolbar를 피한다. 새 컨테이너보다 그룹, 여백과 글자 계층을 먼저 사용한다.
 
-Make the editing surface a simplified structural counterpart of the public component, not merely a stack of unrelated form controls. Preserve relationships that help an operator recognize where content appears:
+각 미디어 미리보기는 교체 컨트롤 옆에, 각 컬렉션 요약은 상세 편집기 옆에 둔다. 편집기가 좁을 때 구조 표현 안의 필드는 읽기 쉬운 한 열 흐름을 유지하고 라벨과 입력창을 빽빽한 다중 열 폼에 억지로 넣지 않는다.
 
-- represent horizontal lists as horizontal flows or compact horizontal items when space allows;
-- represent vertical lists as one-column vertical rows in their public order;
-- represent grids with a corresponding grid and the same recognizable column, ordering, featured-item, grid-area, and span relationships;
-- preserve grouping and nesting for split layouts, cards, tabs, accordions, carousels, and repeated sections;
-- keep images, titles, labels, and summaries in positions that make items visually identifiable;
-- base the editor representation on the public layout at the configured desktop preview width.
+## 구조를 반영한 편집 표현
 
-Match the collection primitive before optimizing editor density:
+편집 화면을 관계없는 폼의 나열이 아니라 공개 컴포넌트의 단순화된 구조 대응물로 만든다. 운영자가 콘텐츠 위치를 알아보는 데 필요한 관계를 보존한다.
 
-| Public preview structure | Editor representation |
+- 가로 목록은 공간이 허용하면 가로 흐름이나 간결한 가로 항목으로 표현한다.
+- 세로 목록은 공개 순서의 한 열 세로 행으로 표현한다.
+- 그리드는 알아볼 수 있는 같은 열, 순서, 강조 항목, grid area와 span 관계를 유지한다.
+- 분할 레이아웃, 카드, 탭, accordion, carousel과 반복 섹션의 그룹과 중첩을 보존한다.
+- 이미지, 제목, 라벨과 요약을 항목의 시각적 정체성을 알아볼 수 있는 위치에 둔다.
+- 설정한 데스크톱 미리보기 폭의 공개 레이아웃을 기준으로 편집 표현을 만든다.
+
+편집기 밀도를 최적화하기 전에 컬렉션 유형을 맞춘다.
+
+| 공개 미리보기 구조 | 편집기 표현 |
 | --- | --- |
-| vertical list | one-column vertical rows |
-| horizontal list | horizontal flow or horizontally oriented items |
-| regular grid | corresponding columns and visual order when space permits |
-| asymmetric or featured grid | matching featured item, row or column spans, and visual grouping |
-| table | row-and-column representation |
-| tabs | tab-aware grouped controls |
-| accordion | collapsible grouped controls |
-| carousel | ordered slide-aware items |
+| 세로 목록 | 한 열 세로 행 |
+| 가로 목록 | 가로 흐름 또는 가로형 항목 |
+| 일반 그리드 | 공간이 허용할 때 같은 열과 시각 순서 |
+| 비대칭·강조 그리드 | 같은 강조 항목, 행·열 span과 시각 그룹 |
+| 표 | 행과 열 표현 |
+| 탭 | 탭을 인지하는 그룹 컨트롤 |
+| accordion | 접을 수 있는 그룹 컨트롤 |
+| carousel | 순서를 반영한 slide 항목 |
 
-Do not convert a vertical public list into a multi-column editor card grid merely to save space. Likewise, do not flatten a public grid into an unrelated list or equal-card grid when position, size, or emphasis identifies items.
+공간을 아끼려고 공개 세로 목록을 다중 열 편집 카드 그리드로 바꾸지 않는다. 위치, 크기나 강조가 항목을 식별한다면 공개 그리드를 관계없는 목록이나 동일 크기 카드 그리드로 평평하게 만들지 않는다.
 
-For example, when the public composition shows item 1 as a full-width or featured block and items 2 and 3 as a paired row, the editor must show the same `1–2` composition rather than three equal columns. Preserve this mapping while editing and reordering.
+예를 들어 공개 구성이 항목 1을 전체 폭·강조 블록으로, 항목 2와 3을 한 쌍의 행으로 보여준다면 편집기도 동일한 `1–2` 구성을 표시하며 세 항목을 같은 열로 만들지 않는다. 편집과 재정렬 중에도 이 매핑을 보존한다.
 
-When the compact editor cannot show public components at full size, use compact item representations rather than changing the layout type. Preserve the same columns, spans, grouping, emphasis, and source order, and keep each item's controls clearly associated with its visual position.
+간결한 편집기에서 공개 컴포넌트를 원래 크기로 표시할 수 없으면 레이아웃 유형을 바꾸지 말고 축약된 항목 표현을 사용한다. 같은 열, span, 그룹, 강조와 소스 순서를 유지하고 각 항목의 컨트롤을 시각 위치와 분명히 연결한다.
 
-Do not reproduce decorative styling at the expense of editing clarity, but make the editing arrangement feel nearly identical to the preview's meaningful structure. Preserve layout type, direction, order, grouping, hierarchy, relative position, and column behavior while keeping labels, controls, focus, and validation accessible.
+편집 명료성을 희생하며 장식 스타일을 복제하지 않되 편집 배치가 미리보기의 의미 있는 구조와 거의 같다고 느껴지게 한다. 라벨, 컨트롤, 포커스와 validation 접근성을 유지하면서 레이아웃 유형, 방향, 순서, 그룹, 계층, 상대 위치와 열 동작을 보존한다.
 
-## Field behavior
+## 필드 동작
 
-- Provide concise labels and help only where ambiguity exists.
-- Size controls for expected content; multiline fields must be visibly multiline.
-- Preserve intentional line breaks in preview and publication.
-- Show existing media before upload controls.
-- Validate near the field and retain the user's input after errors.
-- Prefer safe presets over unrestricted visual controls.
-- Keep keyboard focus visible and labels programmatically associated.
-- On pointer click or keyboard focus, select the mapped preview field immediately. Change route or enclosing component state as needed, scroll only the preview to reveal it, and highlight it without waiting for content changes.
-- Trigger preview reveal once when the focused target changes. Typing within the same field must update content without repeatedly scrolling the preview or stealing editor focus.
+- 라벨은 간결하게 쓰고 의미가 모호할 때만 도움말을 제공한다.
+- 예상 콘텐츠에 맞게 컨트롤 크기를 정하고 여러 줄 필드는 실제로 여러 줄로 보이게 한다.
+- 의도적인 줄바꿈을 미리보기와 공개 결과에 보존한다.
+- 업로드 컨트롤보다 기존 미디어를 먼저 보여준다.
+- 필드 가까이에서 검증하고 오류 후에도 사용자 입력을 유지한다.
+- 제한 없는 시각 컨트롤보다 안전한 preset을 선호한다.
+- 키보드 포커스를 보이게 하고 라벨을 프로그램상 연결한다.
+- 포인터 클릭이나 키보드 포커스 시 연결된 미리보기 필드를 즉시 선택한다. 필요한 라우트나 상위 컴포넌트 상태를 바꾸고, 편집을 기다리지 말고 미리보기만 해당 대상으로 스크롤해 강조한다.
+- 포커스 대상이 바뀔 때 한 번만 미리보기를 표시한다. 같은 필드에 입력하는 동안에는 내용을 갱신하되 미리보기를 반복 스크롤하거나 편집기 포커스를 빼앗지 않는다.
 
-## Collections
+## 컬렉션
 
-Represent repeated content with meaningful cards or rows using an image, title, and short secondary value when available.
+가능하면 이미지, 제목과 짧은 보조 값을 사용해 반복 콘텐츠를 의미 있는 카드나 행으로 표현한다.
 
-Support:
+다음을 지원한다.
 
-- selecting an item without losing its identity after reorder;
-- adding and immediately focusing the new item;
-- editing in a focused detail area;
-- deletion with confirmation or recovery proportional to risk;
-- drag-and-drop ordering with keyboard operation on the drag handle;
-- empty states that explain how to add the first item;
-- disabled or explanatory states when automatic sorting overrides manual order.
+- 재정렬 후에도 항목 정체성을 잃지 않는 선택
+- 추가한 항목을 즉시 선택하고 포커스
+- 집중된 상세 영역에서 편집
+- 위험도에 비례한 확인 또는 복구가 있는 삭제
+- 드래그 손잡이를 통한 키보드 조작을 포함한 순서 변경
+- 첫 항목을 추가하는 방법을 설명하는 빈 상태
+- 자동 정렬이 수동 순서를 덮는 경우의 비활성·설명 상태
 
-Avoid using array indices as persistent keys.
+배열 index를 영구 key로 사용하지 않는다.
 
-## Reordering interactions
+## 재정렬 상호작용
 
-- Start pointer dragging from a dedicated, clearly labeled handle rather than the whole editable card. Preserve text selection, field input, links, and buttons inside the item.
-- Change the handle cursor from `grab` to `grabbing` and give it a clear pointer target.
-- Keep a size-preserving placeholder at the source and show a compact, identifiable drag overlay containing useful item context such as its image, title, or number.
-- Show the exact destination before drop: an insertion line for lists, a target cell for grids, and an explicit empty drop zone for empty collections. Mark invalid destinations clearly.
-- Follow the public layout's movement model: vertical lists move vertically, horizontal lists horizontally, and grids by visual cell order. Do not allow cross-group moves unless the content model explicitly supports them.
-- Auto-scroll only the editor's bounded scroll container when the pointer approaches its edge. Increase speed gradually, cap it, and never move the outer page or preview pane as a side effect of dragging.
-- Reflect the provisional order in the preview without persistently saving every pointer movement. Keep a visible preview association for the dragged item without forcing preview scroll when the affected region is already visible.
-- Restore the original order on `Escape`, invalid drop, or cancellation; retain the selected item by stable ID.
-- After drop, move focus back to the item's handle, announce its new position, and animate items briefly without excessive motion.
-- Provide keyboard-accessible pick up, move, drop, and cancel behavior through the focused drag handle. Arrow keys may move an item while it is in keyboard drag mode, but do not render standalone up/down arrow buttons beside each item. Announce position and valid destinations to assistive technology.
+- 편집 카드 전체가 아니라 명확히 표시된 전용 손잡이에서 포인터 드래그를 시작한다. 항목 안의 텍스트 선택, 입력, 링크와 버튼을 보존한다.
+- 손잡이 cursor를 `grab`에서 `grabbing`으로 바꾸고 충분한 포인터 대상을 제공한다.
+- 원본 위치에 같은 크기의 placeholder를 유지하고 이미지, 제목이나 번호처럼 항목을 알아볼 수 있는 간결한 drag overlay를 표시한다.
+- drop 전에 정확한 목적지를 보여준다. 목록은 삽입선, 그리드는 대상 cell, 빈 컬렉션은 명시적인 drop zone을 사용하고 유효하지 않은 목적지를 분명히 표시한다.
+- 공개 레이아웃의 이동 모델을 따른다. 세로 목록은 세로로, 가로 목록은 가로로, 그리드는 시각 cell 순서로 이동한다. 콘텐츠 모델이 명시적으로 지원하지 않으면 그룹 사이 이동을 허용하지 않는다.
+- 포인터가 가장자리에 가까울 때 편집기의 제한된 스크롤 컨테이너만 자동 스크롤한다. 속도를 점진적으로 높이고 상한을 두며 바깥 페이지나 미리보기를 움직이지 않는다.
+- 모든 포인터 이동을 저장하지 않고 임시 순서를 미리보기에 반영한다. 영향을 받는 영역이 이미 보이면 강제 스크롤하지 않고 드래그 항목과 미리보기의 연결을 유지한다.
+- `Escape`, 유효하지 않은 drop이나 취소 시 원래 순서를 복원하고 안정적인 ID로 선택 항목을 유지한다.
+- drop 후 항목 손잡이로 포커스를 돌리고 새 위치를 알리며 과도하지 않은 짧은 animation을 사용한다.
+- 포커스된 손잡이에서 키보드 pick up, 이동, drop과 취소를 제공한다. 키보드 drag mode에서는 방향키로 항목을 이동할 수 있지만 각 항목 옆에 별도 위·아래 버튼을 렌더링하지 않는다. 위치와 유효한 목적지를 보조 기술에 알린다.
 
-## Image and identity assets
+## 이미지와 식별 자산
 
-- Show the current asset, usage context, recommended dimensions or aspect ratio, and supported formats before replacement controls.
-- Provide upload and replacement for operator-managed images; provide removal or restore-default only when the consuming component has a safe empty or fallback state.
-- Expose alternative text for meaningful content images. Mark decorative images explicitly and avoid misleading alt-text controls for CSS decoration when the public implementation cannot use them.
-- Group responsive sources, crops, light/dark variants, or icon sizes as one understandable asset set instead of unrelated file inputs.
-- Always place a favicon field under recognizable global site or brand settings. Show upload or add controls when none exists and replacement or restoration controls when one does.
-- Place logo, touch icon, manifest icons, and default social image under the same global settings when applicable.
-- Preview content and background image changes in their real public components. For browser-level assets such as favicons, provide a local preview and clearly indicate when a reload or metadata refresh is required after applying.
-- Explain why a discovered asset is read-only or excluded when an operator could reasonably expect to edit it.
+- 교체 컨트롤 전에 현재 자산, 사용 맥락, 권장 크기·비율과 지원 형식을 보여준다.
+- 운영자가 관리하는 이미지에 업로드와 교체를 제공한다. 소비 컴포넌트에 안전한 빈 상태나 fallback이 있을 때만 제거 또는 기본값 복원을 제공한다.
+- 의미 있는 콘텐츠 이미지에는 대체 텍스트를 제공한다. 장식 이미지를 명시하고 공개 구현이 사용할 수 없는 CSS 장식에는 오해를 부르는 대체 텍스트 컨트롤을 만들지 않는다.
+- 반응형 소스, crop, 밝은·어두운 variant나 icon 크기를 관계없는 파일 입력으로 나누지 말고 이해 가능한 하나의 자산 묶음으로 표시한다.
+- 파비콘 필드는 항상 알아볼 수 있는 공통 사이트·브랜드 설정에 둔다. 파비콘이 없으면 추가, 있으면 교체·복원 컨트롤을 보여준다.
+- 해당하면 로고, touch icon, manifest icon과 기본 소셜 이미지를 같은 공통 설정에 둔다.
+- 콘텐츠와 배경 이미지 변경은 실제 공개 컴포넌트에서 미리 본다. 파비콘 같은 브라우저 수준 자산은 로컬 미리보기를 제공하고 반영 후 새로고침이나 메타데이터 갱신이 필요함을 명확히 알린다.
+- 운영자가 합리적으로 편집을 기대할 자산을 읽기 전용으로 두거나 제외하면 이유를 설명한다.
 
-## Preview
+## 미리보기
 
-- Render real public components and styles.
-- Update promptly as working state changes.
-- Render a stable desktop preview at the configured representative width.
-- Use all available shell height and keep the full preview document reachable through its own scroll container. Empty space is acceptable; inaccessible clipped content is not.
-- Give each editable preview target a stable mapping to its editor target; do not depend on array indexes or visible text for identity. Support mappings at page, section, component, collection-item, and field level.
-- Map individual editable text, rich text, media, labels, buttons, links, and nested values whenever they have distinct editor controls. Prefer the deepest mapped target under the pointer; fall back through item, component, and section ancestors only when no finer target exists.
-- Let clicking an editable preview target keep the preview's current scroll position while selecting, expanding, and—only when needed—scrolling the corresponding editor control into view.
-- When editor selection changes, keep the editor's current scroll position while navigating the preview to the required route, activating enclosing tabs, accordions, or carousel state as needed, scrolling the preview target into view, and applying a visible selection outline or overlay.
-- Store the initiating pane or event origin with selection commands. Apply reveal and scroll effects only to the opposite pane, and consume reflected selection updates without triggering navigation or scrolling again.
-- Distinguish preview hover from persistent selection. Keep highlights aligned after preview-container and content resizing.
-- Use scroll margins or equivalent positioning so sticky headers and editor chrome do not obscure the selected target.
-- Preserve selection across content edits and collection reorder by stable ID. Clear or redirect selection predictably when the selected target is deleted.
-- During reorder, render provisional order changes promptly while keeping preview scrolling independent. On cancel, restore the prior preview order; on drop, retain and highlight the moved item.
-- Avoid stealing text-entry focus, moving the initiating pane, coupling scroll positions, or creating event and scroll loops when editor and preview notify each other of the same selection.
-- Provide a non-pointer path from the editor to every target; preview click-to-edit must complement rather than replace accessible editor navigation.
-- Contain preview links and destructive interactions so operators do not accidentally leave the editor or trigger real actions.
+- 실제 공개 컴포넌트와 스타일을 렌더링한다.
+- 작업 상태가 바뀌면 신속하게 갱신한다.
+- 설정한 대표 폭으로 안정적인 데스크톱 미리보기를 렌더링한다.
+- 사용 가능한 shell 높이를 모두 사용하고 미리보기 자체 스크롤로 문서 전체에 접근하게 한다. 빈 공간은 허용하지만 접근할 수 없게 잘린 콘텐츠는 허용하지 않는다.
+- 각 편집 가능 미리보기 대상에 안정적인 편집기 매핑을 둔다. 배열 index나 보이는 문구를 ID로 사용하지 않는다. 페이지, 섹션, 컴포넌트, 컬렉션 항목과 필드 수준을 지원한다.
+- 별도 편집 컨트롤이 있는 텍스트, rich text, 미디어, 라벨, 버튼, 링크와 중첩 값을 각각 매핑한다. 포인터 아래의 가장 깊은 매핑을 우선하고 더 작은 대상이 없을 때만 항목→컴포넌트→섹션 상위 대상으로 올라간다.
+- 편집 가능한 미리보기 대상을 클릭하면 미리보기의 현재 스크롤을 유지하고 해당 편집 컨트롤을 선택·펼친 뒤 필요할 때만 편집기를 스크롤해 보이게 한다.
+- 편집기 선택이 바뀌면 편집기의 현재 스크롤을 유지한다. 필요한 라우트로 미리보기를 이동하고 상위 탭, accordion이나 carousel 상태를 활성화한 뒤 대상이 보이도록 미리보기만 스크롤하고 선택 outline·overlay를 표시한다.
+- 선택 명령에 시작 영역이나 event origin을 저장한다. 반대쪽 영역에만 표시·스크롤 효과를 적용하고 되돌아온 선택 알림은 다시 탐색하거나 스크롤하지 않고 소비한다.
+- 미리보기 hover와 지속 선택을 구분한다. 미리보기 컨테이너와 콘텐츠 크기가 바뀌어도 강조 위치를 맞춘다.
+- sticky header와 편집기 chrome이 선택 대상을 가리지 않도록 scroll margin 같은 위치 보정을 사용한다.
+- 콘텐츠 편집과 컬렉션 재정렬 중 안정적인 ID로 선택을 유지한다. 선택 대상을 삭제하면 선택을 예측 가능하게 해제하거나 다른 대상으로 옮긴다.
+- 재정렬 중 임시 순서를 신속히 렌더링하되 미리보기 스크롤은 독립적으로 유지한다. 취소 시 이전 순서를 복원하고 drop 후 이동한 항목을 선택·강조한다.
+- 편집기와 미리보기가 같은 선택을 서로 알릴 때 텍스트 입력 포커스를 빼앗거나 시작 영역을 움직이거나 스크롤 위치를 결합하거나 event·scroll loop를 만들지 않는다.
+- 모든 대상을 편집기에서 포인터 없이도 접근할 수 있게 한다. 미리보기 클릭 편집은 접근 가능한 편집기 탐색을 대체하지 않고 보완한다.
+- 미리보기 링크와 파괴적 상호작용을 제한해 운영자가 편집기를 벗어나거나 실제 작업을 실수로 실행하지 않게 한다.
 
-## Apply and feedback
+## 반영하기와 피드백
 
-Preview changes immediately, but keep them in working state until the operator selects `Apply`. Make unchanged, changed, applying, applied, and failed states distinct through the single bottom action and concise adjacent feedback.
+변경은 미리보기에 즉시 표시하되 운영자가 `반영하기`를 선택할 때까지 작업 상태에 둔다. 하단 작업과 짧은 인접 피드백으로 변경 없음, 변경됨, 반영 중, 반영 완료와 실패를 구분한다.
 
-Disable `Apply` when nothing changed, prevent duplicate submission while applying, and retain failed changes for retry. Warn before closing or navigating away with unapplied changes. Do not add separate draft-save, publish, undo, or redo buttons.
+변경이 없으면 `반영하기`를 비활성화하고 반영 중 중복 제출을 막으며 실패한 변경을 재시도할 수 있게 유지한다. 반영하지 않은 변경이 있는 상태에서 닫거나 이동하기 전에 경고한다. 별도의 초안 저장, 발행, undo나 redo 버튼을 추가하지 않는다.
 
-## Global styles
+## 공통 스타일
 
-Always show a recognizable global settings area with Brand, Style, Header, and Footer groups when applicable. Brand includes the shared logo and favicon; Style includes primary color and typography or font family; Header includes shared navigation; Footer includes shared footer content. Additional safe options may include default social image, density, button style, or card radius when the site supports them.
+해당하는 경우 브랜드·스타일·헤더·푸터로 묶인 알아보기 쉬운 공통 설정을 표시한다. 브랜드에는 공유 로고와 파비콘, 스타일에는 프라이머리 색상과 글씨체, 헤더에는 공유 탐색, 푸터에는 공유 푸터 콘텐츠를 둔다. 사이트가 지원하면 기본 소셜 이미지, 밀도, 버튼 스타일이나 카드 radius 같은 안전한 옵션을 추가할 수 있다.
 
-Bind primary color and typography controls to the site's existing shared tokens so every intended color and text consumer changes consistently across the entire site. Offer the site's loaded font families or a small validated preset list; do not accept arbitrary font URLs, arbitrary CSS, or choices the public rendering path cannot load. Show every global effect immediately throughout the preview when the browser surface permits it.
+프라이머리 색상과 글씨체 컨트롤을 기존 공통 토큰에 연결해 의도한 모든 색상·텍스트 소비자가 사이트 전체에서 일관되게 바뀌게 한다. 사이트에 로드된 글씨체나 검증된 작은 preset 목록만 제공하며 임의의 font URL, CSS나 공개 렌더링 경로가 로드할 수 없는 선택을 허용하지 않는다. 브라우저 화면이 허용하는 모든 공통 효과를 미리보기 전체에 즉시 표시한다.
 
-## Destructive and high-impact actions
+## 파괴적·광범위 작업
 
-Confirm permanent deletion and broad style resets when their impact warrants it. Keep production writes behind the single explicit `Apply` action and never disguise them as preview controls.
+영구 삭제와 광범위한 스타일 초기화는 영향도에 따라 확인한다. 운영 쓰기는 단일 `반영하기` 뒤에 두고 미리보기 컨트롤처럼 위장하지 않는다.

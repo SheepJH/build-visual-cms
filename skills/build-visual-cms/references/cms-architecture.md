@@ -1,35 +1,35 @@
-# CMS architecture
+# CMS 구조
 
-## Single rendering source
+## 단일 렌더링 소스
 
-The editor preview and public site must render the same public components with different content state. Avoid duplicated preview-only markup and CSS.
+편집기 미리보기와 공개 사이트는 서로 다른 콘텐츠 상태를 같은 공개 컴포넌트로 렌더링해야 한다. 미리보기 전용 마크업과 CSS를 복제하지 않는다.
 
-Preferred data flow:
+권장 데이터 흐름:
 
 ```text
-editor controls -> working content state -> public components in preview
-                                |-> Apply -> persistence adapter -> public pages
+편집 컨트롤 -> 작업 콘텐츠 상태 -> 미리보기의 공개 컴포넌트
+                              |-> 반영하기 -> 저장 어댑터 -> 공개 페이지
 ```
 
-## Content model
+## 콘텐츠 모델
 
-- Define explicit types or schemas close to the content boundary.
-- Give repeatable objects stable IDs independent of array position.
-- Provide backward-compatible defaults when stored content may predate new fields.
-- Preserve meaningful line breaks and distinguish arrays from multiline strings based on semantics.
-- Keep secrets and operational integration settings outside editable content.
+- 콘텐츠 경계 가까이에 명시적인 타입이나 스키마를 정의한다.
+- 반복 객체에는 배열 위치와 무관한 안정적인 ID를 부여한다.
+- 저장된 콘텐츠가 새 필드보다 오래됐을 수 있으면 하위 호환 기본값을 제공한다.
+- 의미 있는 줄바꿈을 보존하고 의미에 따라 배열과 여러 줄 문자열을 구분한다.
+- 비밀 정보와 운영 연동 설정은 편집 콘텐츠 밖에 둔다.
 
-## Working state
+## 작업 상태
 
-- Keep one canonical working state in the editor.
-- Derive changed state by comparing it against the last applied snapshot.
-- Preview working changes immediately without persisting each keystroke.
-- Do not add draft saving, version history, or undo/redo controls.
-- Keep item selection by ID so reordering does not edit the wrong item.
+- 편집기에 하나의 표준 작업 상태만 둔다.
+- 마지막으로 반영한 snapshot과 비교해 변경 상태를 계산한다.
+- 입력할 때마다 저장하지 말고 작업 중 변경을 미리보기에 즉시 보여준다.
+- 초안 저장, version history나 undo·redo 컨트롤을 추가하지 않는다.
+- 재정렬 후 잘못된 항목을 수정하지 않도록 ID로 선택 상태를 유지한다.
 
-## Persistence
+## 저장
 
-Prefer a narrow boundary such as:
+다음처럼 좁은 경계를 선호한다.
 
 ```ts
 interface ContentRepository<T> {
@@ -38,28 +38,28 @@ interface ContentRepository<T> {
 }
 ```
 
-Adapt this shape to the existing application rather than requiring the exact interface. Possible backends include files, an existing API, a database, or a hosted content service.
+정확히 이 인터페이스를 강요하지 말고 기존 애플리케이션에 맞춘다. 파일, 기존 API, 데이터베이스나 호스팅 콘텐츠 서비스를 백엔드로 사용할 수 있다.
 
-Never silently replace production persistence with browser-only storage. Local storage is acceptable for prototypes only when clearly described.
+운영 저장을 브라우저 전용 저장소로 조용히 바꾸지 않는다. local storage는 프로토타입임을 명확히 밝힌 경우에만 허용한다.
 
-## Apply behavior
+## 반영하기 동작
 
-Expose one operator action labeled `Apply` at the bottom of the left editor pane. Adapt that action to the existing durable write or publication mechanism without exposing separate save-draft and publish controls. Disable it when nothing changed, show applying and failure feedback in place, and keep failed working changes available for retry.
+왼쪽 편집기 하단에 `반영하기` 하나를 제공한다. 초안 저장과 발행을 별도 컨트롤로 노출하지 않고 기존의 영구 쓰기나 공개 방식에 연결한다. 변경이 없으면 비활성화하고 반영 중과 실패 피드백을 같은 위치에 표시하며 실패한 작업 상태를 재시도할 수 있게 유지한다.
 
-## Media
+## 미디어
 
-Reuse existing asset storage and image processing where possible. Validate file type, size, dimensions, aspect ratio, animation, and transparency only as required by the consuming component. Show upload progress and actionable errors, and store durable references rather than transient local object URLs. Do not make uploaded private documents public without explicit authorization.
+가능하면 기존 자산 저장소와 이미지 처리 경로를 재사용한다. 소비 컴포넌트에 필요한 범위에서만 파일 유형, 크기, 치수, 비율, animation과 transparency를 검증한다. 업로드 진행률과 실행 가능한 오류를 표시하고 일시적인 local object URL 대신 영구 참조를 저장한다. 명시적 승인 없이 업로드된 비공개 문서를 공개하지 않는다.
 
-Model media fields with the metadata the project actually consumes, such as alternative text, intrinsic dimensions, crop or focal point, caption, responsive variants, and light/dark variants. Do not invent transformation controls that the rendering path cannot honor.
+대체 텍스트, 원본 치수, crop·초점, caption, 반응형 variant와 밝은·어두운 variant처럼 프로젝트가 실제로 소비하는 메타데이터만 미디어 필드에 모델링한다. 렌더링 경로가 처리하지 못하는 변환 컨트롤을 만들지 않는다.
 
-Always model favicon as a global setting, including a missing-value state that can create the site's first favicon. Update the framework's existing metadata pipeline or add its smallest native favicon mechanism, generate or request required size variants deliberately, and preserve cache-busting behavior. Group other application identity assets when applicable. Treat default Open Graph or social-sharing images as global metadata while allowing page-specific overrides only when the site already supports or needs them.
+파비콘은 첫 파비콘을 만들 수 있는 빈 상태를 포함해 항상 공통 설정으로 모델링한다. 프레임워크의 기존 메타데이터 경로를 수정하거나 가장 작은 네이티브 파비콘 방식을 추가하고, 필요한 크기 variant를 의도적으로 만들거나 요청하며 cache busting 동작을 보존한다. 해당하면 다른 앱 식별 자산도 함께 묶는다. 기본 Open Graph·소셜 공유 이미지는 공통 메타데이터로 다루고, 사이트가 이미 지원하거나 필요할 때만 페이지별 override를 허용한다.
 
-Provide replacement, removal, and restoration semantics appropriate to each asset. Prevent removal when a required identity or layout asset has no safe fallback.
+자산별로 적절한 교체, 제거와 기본값 복원 의미를 제공한다. 필수 식별·레이아웃 자산에 안전한 fallback이 없으면 제거를 막는다.
 
-## Authentication and authorization
+## 인증과 권한
 
-Reuse established authentication. Protect editor routes and every write operation server-side; hiding UI is not authorization. If permissions vary, separate viewing, applying, and administrative capabilities.
+기존 인증을 재사용한다. 편집기 라우트와 모든 쓰기 작업을 서버에서 보호한다. UI를 숨기는 것은 권한 검사가 아니다. 권한이 다르면 보기, 반영과 관리 권한을 구분한다.
 
-## Preview isolation
+## 미리보기 격리
 
-Prevent preview navigation from replacing the editor unexpectedly. Render the configured desktop preview at a stable representative width and avoid scaling techniques that make text or controls misleading.
+미리보기 탐색이 편집기를 예기치 않게 대체하지 않도록 막는다. 설정한 대표 데스크톱 폭으로 미리보기를 안정적으로 렌더링하고 텍스트나 컨트롤 크기를 오해하게 만드는 축소 기법을 피한다.

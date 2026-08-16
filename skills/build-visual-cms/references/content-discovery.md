@@ -1,82 +1,82 @@
-# Content discovery
+# 콘텐츠 조사
 
-## Goal
+## 목표
 
-Derive the CMS model from the target website. Do not begin with assumed entities.
+대상 웹사이트에서 CMS 모델을 도출한다. 미리 정한 엔터티로 시작하지 않는다.
 
-## Repository inspection
+## 저장소 조사
 
-Identify:
+다음을 찾는다.
 
-- framework, routing model, rendering mode, package scripts, and deployment configuration;
-- public pages, shared layouts, navigation, headers, footers, and reusable sections;
-- hard-coded copy, imported content objects, JSON, Markdown, database reads, and API calls;
-- repeated rendering through arrays or mapped data;
-- content images, CSS and inline background images, responsive sources, videos, documents, and external-link fields;
-- branding and metadata assets such as logos, favicons, Apple touch icons, web-app manifest icons, mask icons, and default social-sharing images;
-- theme variables, fonts, colors, spacing, radii, and reusable component variants;
-- existing authentication, roles, storage, database, server actions, and API routes;
-- existing admin surfaces and editing conventions.
+- 프레임워크, 라우팅 모델, 렌더링 방식, 패키지 스크립트와 배포 설정
+- 공개 페이지, 공유 레이아웃, 탐색, 헤더, 푸터와 재사용 섹션
+- 하드코딩 문구, 가져온 콘텐츠 객체, JSON, Markdown, 데이터베이스 조회와 API 호출
+- 배열이나 매핑 데이터로 반복 렌더링하는 구조
+- 콘텐츠 이미지, CSS·인라인 배경 이미지, 반응형 소스, 영상, 문서와 외부 링크 필드
+- 로고, 파비콘, Apple touch icon, 웹 앱 manifest icon, mask icon과 기본 소셜 공유 이미지 같은 브랜드·메타데이터 자산
+- 테마 변수, 글씨체, 색상, 간격, radius와 재사용 컴포넌트 variant
+- 기존 인증, 역할, 저장소, 데이터베이스, server action과 API route
+- 기존 관리자 화면과 편집 규칙
 
-Respect repository instructions and dirty worktrees. Prefer fast file search and inspect representative components before broad refactoring.
+저장소 지침과 dirty worktree를 존중한다. 빠른 파일 검색을 사용하고 넓은 리팩터링 전에 대표 컴포넌트를 확인한다.
 
-## Classify candidates
+## 후보 분류
 
-Classify each candidate as one of:
+각 후보를 다음 중 하나로 분류한다.
 
-1. Global content: branding and logo, shared header navigation labels and links, shared calls to action, contact details, social links, and footer.
-2. Global style: always include primary color and typography or font-family controls, then add other controlled tokens such as spacing density or card style only when the site uses them.
-3. Page content: headings, descriptions, calls to action, metadata.
-4. Section content: locally grouped fields.
-5. Collection: ordered repeatable objects displayed as a list, grid, carousel, timeline, table, or tabs.
-6. Operational configuration: secrets, permissions, integration IDs, database configuration. Do not expose these as ordinary CMS fields.
+1. 공통 콘텐츠: 브랜드와 로고, 공유 헤더 메뉴의 문구·링크, 공통 CTA, 연락처, 소셜 링크와 푸터
+2. 공통 스타일: 프라이머리 색상과 글씨체를 포함하고 사이트가 사용할 때만 간격 밀도나 카드 스타일 같은 제어 가능한 토큰을 추가
+3. 페이지 콘텐츠: 제목, 설명, CTA와 메타데이터
+4. 섹션 콘텐츠: 한 영역에 묶인 필드
+5. 컬렉션: 리스트, 그리드, 캐러셀, 타임라인, 표 또는 탭으로 표시하는 순서 있는 반복 객체
+6. 운영 설정: 비밀 정보, 권한, 연동 ID와 데이터베이스 설정. 일반 CMS 필드로 노출하지 않는다.
 
-Classify content from a shared layout or content reused across two or more pages as global by default. A tab set, submenu, or navigation control used only inside one page remains page content even if it visually resembles the shared header navigation.
+공유 레이아웃의 콘텐츠나 두 페이지 이상에서 재사용하는 콘텐츠는 기본적으로 공통으로 분류한다. 한 페이지 안에서만 쓰는 탭, 하위 메뉴나 탐색 컨트롤은 공유 헤더처럼 보여도 페이지 콘텐츠로 유지한다.
 
-For every operator-managed candidate in scope, identify the meaningful value, supported settings, public consumer, and semantic control. Apply this rule to discovered content types rather than relying on a closed list; do not expose derived output or controls the rendering path cannot honor.
+범위에 포함된 운영자 관리 후보마다 의미 있는 값, 지원 설정, 공개 소비 컴포넌트와 적합한 컨트롤을 찾는다. 닫힌 유형 목록에 의존하지 말고 발견한 콘텐츠 유형에 이 원칙을 적용한다. 계산 결과나 렌더링 경로가 지원하지 않는 컨트롤은 노출하지 않는다.
 
-## Image asset inventory
+## 이미지 자산 조사
 
-Inventory operator-relevant images across components, content files, stylesheets, public/static directories, framework metadata, manifests, and storage-backed records. Classify each asset as:
+컴포넌트, 콘텐츠 파일, 스타일시트, public·static 디렉터리, 프레임워크 메타데이터, manifest와 저장소 레코드에서 운영자 관련 이미지를 찾는다. 각 자산을 다음처럼 분류한다.
 
-- site-wide identity: logo variants, favicon, touch icon, manifest icons, mask icon, and default social image;
-- page or section content: hero, editorial, gallery, card, testimonial, team, product, or other project-specific imagery;
-- presentation: background, texture, decorative illustration, or responsive art direction;
-- system asset: library icons, authentication/security imagery, generated build output, or implementation-critical graphics.
+- 사이트 공통 식별 자산: 로고 variant, 파비콘, touch icon, manifest icon, mask icon과 기본 소셜 이미지
+- 페이지·섹션 콘텐츠: hero, editorial, gallery, card, testimonial, team, product 또는 프로젝트별 이미지
+- 표현 자산: 배경, texture, 장식 illustration 또는 반응형 art direction
+- 시스템 자산: 라이브러리 icon, 인증·보안 이미지, 생성된 빌드 결과나 구현 핵심 그래픽
 
-Make operator-managed assets editable by default. Do not expose system assets or assets whose replacement would break behavior, licensing, security, or layout assumptions. Record excluded assets and a concise reason instead of silently omitting them.
+운영자가 관리하는 자산은 기본적으로 편집 가능하게 한다. 교체 시 동작, 라이선스, 보안이나 레이아웃 가정을 깨는 시스템 자산은 노출하지 않는다. 조용히 생략하지 말고 제외 자산과 간단한 사유를 기록한다.
 
-Create a global favicon candidate even when discovery finds no favicon file, metadata entry, or manifest reference. Absence is an editable empty state, not a reason to omit the field.
+파비콘 파일, 메타데이터나 manifest 참조가 없어도 공통 파비콘 후보를 만든다. 없음은 편집 가능한 빈 상태이며 필드 생략 사유가 아니다.
 
-Create global primary-color and typography candidates even when the site lacks clean shared tokens. Trace every intended consumer and prefer the existing theme and font-loading path; propose the smallest shared token only when necessary for consistent site-wide editing.
+사이트에 정돈된 공통 토큰이 없어도 새 CMS나 공통 설정을 만드는 범위에서는 프라이머리 색상과 글씨체 후보를 만든다. 모든 대상 소비자를 추적하고 기존 테마·폰트 로딩 경로를 우선하며, 사이트 전체 편집에 필요할 때만 가장 작은 공통 토큰을 제안한다.
 
-Create a global logo candidate when the site has a shared logo. Inventory shared header navigation labels, destinations, order, active-state behavior, and shared calls to action so operators can edit them together without mixing them into page content.
+사이트에 공유 로고가 있으면 공통 로고 후보를 만든다. 공유 헤더 메뉴의 문구, 목적지, 순서, 활성 상태와 공통 CTA를 함께 조사해 페이지 콘텐츠와 섞지 않고 한곳에서 편집하게 한다.
 
-Trace variants that represent one logical image, including desktop/mobile crops, `srcset` sources, light/dark logos, favicon sizes, and manifest icon sets. Model them together when operators must understand or replace them as a group.
+데스크톱·모바일 crop, `srcset` 소스, 밝은·어두운 로고, 파비콘 크기와 manifest icon처럼 하나의 논리 이미지를 나타내는 variant를 추적한다. 운영자가 하나로 이해하고 교체해야 한다면 묶어서 모델링한다.
 
-## Infer field semantics
+## 필드 의미 추론
 
-- Use a short text field for labels and concise titles.
-- Use multiline input when intentional line breaks matter.
-- Use rich text only when authors genuinely need formatting; avoid it for structured content.
-- Use a link field with validation for URLs and internal routes. Keep a link's visible label and destination separately editable when both exist.
-- Use an image or media field when the value represents an asset, not a raw URL editing task.
-- Use a list for repeated primitive values.
-- Use a collection for repeated objects with stable IDs.
-- Use a select, radio group, or preset when the allowed choices are finite.
-- Use a boolean switch only for clear on/off behavior.
+- 라벨과 짧은 제목에는 짧은 텍스트 필드를 사용한다.
+- 의도적인 줄바꿈이 중요하면 여러 줄 입력을 사용한다.
+- 작성자가 실제로 서식을 필요로 할 때만 rich text를 사용하고 구조화 콘텐츠에는 피한다.
+- URL과 내부 경로를 검증하는 링크 필드를 사용한다. 표시 문구와 목적지가 모두 있으면 각각 편집할 수 있게 한다.
+- 값이 자산을 나타내면 raw URL 필드 대신 이미지·미디어 필드를 사용한다.
+- 반복 primitive 값에는 리스트를 사용한다.
+- 반복 객체에는 안정적인 ID가 있는 컬렉션을 사용한다.
+- 가능한 선택이 제한되어 있으면 select, radio group 또는 preset을 사용한다.
+- 명확한 on/off 의미에만 boolean switch를 사용한다.
 
-## Discovery output
+## 조사 결과
 
-Before implementation, maintain a compact internal map containing:
+구현 전에 다음을 담은 간결한 내부 지도를 유지한다.
 
-- content group and source location;
-- proposed field type;
-- public component consuming it;
-- whether it is global, page-local, or repeated;
-- persistence and migration implications;
-- image usage locations, required dimensions or aspect ratios, variants, alternative text behavior, and whether replacement is safe;
-- intentionally excluded image assets and the reason for exclusion;
-- uncertainty requiring user input.
+- 콘텐츠 그룹과 소스 위치
+- 제안 필드 유형
+- 이를 소비하는 공개 컴포넌트
+- 공통, 페이지 전용 또는 반복 여부
+- 저장과 마이그레이션 영향
+- 이미지 사용 위치, 필요한 크기·비율, variant, 대체 텍스트 동작과 안전한 교체 여부
+- 의도적으로 제외한 이미지와 사유
+- 사용자 확인이 필요한 불확실성
 
-Do not force every visible string into the CMS. Prioritize content operators reasonably need to change and keep system copy or implementation details in code when appropriate.
+보이는 모든 문자열을 CMS에 억지로 넣지 않는다. 운영자가 합리적으로 변경할 콘텐츠를 우선하고 시스템 문구와 구현 세부사항은 적절한 경우 코드에 남긴다.
