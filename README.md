@@ -6,22 +6,26 @@
 - 편집 필드와 미리보기 요소를 양방향으로 선택·이동
 - 편집기와 미리보기의 스크롤을 독립적으로 유지
 - 미리보기와 구분되는 밝고 중립적인 편집기 배경
-- 텍스트, 이미지와 항상 제공되는 파비콘·프라이머리 색상·글씨체 공통 설정
+- 텍스트, 이미지와 파비콘·프라이머리 색상·글씨체 공통 설정
 - 실제 리스트·그리드·비대칭 배치를 편집기에도 반영
 - 왼쪽 편집기 하단의 `반영하기` 버튼 하나로 변경 적용
 - **Codex와 Claude Code에서 공통 사용 가능**
 
 ## 🚀 설치
 
-### Codex
+### Codex와 Claude Code에 함께 설치
 
 ```bash
-npx skills add SheepJH/build-visual-cms@build-visual-cms --agent codex --global --yes
+npx skills add SheepJH/build-visual-cms@build-visual-cms --agent codex --agent claude-code --global --yes
 ```
 
-### Claude Code
+### 하나만 설치
 
 ```bash
+# Codex
+npx skills add SheepJH/build-visual-cms@build-visual-cms --agent codex --global --yes
+
+# Claude Code
 npx skills add SheepJH/build-visual-cms@build-visual-cms --agent claude-code --global --yes
 ```
 
@@ -51,7 +55,7 @@ $build-visual-cms를 사용해서 CMS 도입안을 먼저 작성해줘. 파일�
 - 범위가 넓으면 대표 페이지 하나에서 구조를 먼저 검증한 뒤 필요한 범위까지만 확장합니다.
 - 전체 사이트 구현은 사용자가 모든 페이지를 명시적으로 요청한 경우에만 수행합니다.
 - 참고 문서와 검증 항목은 작업에 필요한 부분만 사용합니다.
-- 기본 검증은 대표 편집 흐름, 독립 스크롤, 전역 토큰 하나, `반영하기` 왕복으로 제한합니다.
+- 기본 검증은 대표 편집 흐름, 독립 스크롤, `반영하기` 왕복과 범위에 포함된 전역 토큰으로 제한합니다.
 - 전체 페이지 스크린샷과 전수 검사는 명시적으로 요청하거나 위험이 큰 전체 작업에서만 수행합니다.
 
 </details>
