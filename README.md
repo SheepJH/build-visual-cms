@@ -9,24 +9,14 @@
 - 텍스트, 이미지와 파비콘·프라이머리 색상·글씨체 공통 설정
 - 실제 리스트·그리드·비대칭 배치를 편집기에도 반영
 - 왼쪽 편집기 하단의 `반영하기` 버튼 하나로 변경 적용
-- **Codex와 Claude Code에서 공통 사용 가능**
+- **Codex 전용 Agent Skill**
 
 ## 🚀 설치
 
-### Codex와 Claude Code에 함께 설치
+### Codex에 설치
 
 ```bash
-npx skills add SheepJH/build-visual-cms@build-visual-cms --agent codex --agent claude-code --global --yes
-```
-
-### 하나만 설치
-
-```bash
-# Codex
 npx skills add SheepJH/build-visual-cms@build-visual-cms --agent codex --global --yes
-
-# Claude Code
-npx skills add SheepJH/build-visual-cms@build-visual-cms --agent claude-code --global --yes
 ```
 
 설치한 뒤 해당 도구를 새로 시작하세요. `--global`을 빼면 현재 프로젝트에만 설치됩니다.
@@ -138,7 +128,7 @@ skills/build-visual-cms/
     └── validation-checklist.md
 ```
 
-`SKILL.md`와 `references/`는 Codex와 Claude가 함께 사용하며, `agents/openai.yaml`은 Codex용 표시 정보입니다.
+`SKILL.md`와 `references/`에는 Codex가 작업 중 읽을 지침이 있으며, `agents/openai.yaml`에는 Codex용 표시 정보가 있습니다.
 
 ## 📝 커밋 규칙
 
@@ -147,5 +137,5 @@ Conventional Commits 형식과 한국어 설명을 사용합니다.
 ```text
 feat: 편집기와 미리보기의 선택 동기화 추가
 fix: 세부 문구가 상위 영역으로 선택되는 문제 수정
-docs: Codex와 Claude 설치 방법 보완
+docs: Codex 설치 방법 보완
 ```
