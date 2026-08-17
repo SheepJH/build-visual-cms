@@ -11,6 +11,16 @@
 - 왼쪽 편집기 하단의 `반영하기` 버튼 하나로 변경 적용
 - **Codex 전용 Agent Skill**
 
+## ✨ 결과 예시
+
+기존 웹사이트의 디자인과 실제 컴포넌트를 유지하면서, 왼쪽에서 콘텐츠를 수정하고 오른쪽에서 결과를 바로 확인하는 CMS로 만듭니다.
+
+| 기존 웹사이트 | Visual CMS |
+| --- | --- |
+| ![Studio Aurora 기존 웹사이트](docs/assets/public-site.jpg) | ![Studio Aurora Visual CMS](docs/assets/visual-cms.jpg) |
+
+[▶️ 9초 데모 영상 보기](docs/assets/visual-cms-demo.mp4)
+
 ## 🚀 설치
 
 ### Codex에 설치
