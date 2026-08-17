@@ -19,7 +19,9 @@
 | --- | --- |
 | ![Studio Aurora 기존 웹사이트](docs/assets/public-site.jpg) | ![Studio Aurora Visual CMS](docs/assets/visual-cms.jpg) |
 
-[▶️ 9초 데모 영상 보기](docs/assets/visual-cms-demo.mp4)
+### 🎬 편집 데모
+
+![Visual CMS에서 갤러리를 편집하고 재정렬하는 9초 데모](docs/assets/visual-cms-demo.gif)
 
 ## 🚀 설치
 
